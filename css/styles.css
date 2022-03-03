@@ -1,0 +1,133 @@
+* {
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    font-family: 'Trebuchet MS';
+}
+body {
+    background-color: rgb(0, 0, 0);
+    margin: auto;
+}
+#main {
+    width: 1000px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: auto;
+    background-color: rgb(33, 33, 33);
+    border: 1px solid darkgrey;
+}
+a {
+    color: orange;
+    text-decoration: none;
+}
+h2, h3, h4 {
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+h1 {
+    text-align: center;
+}
+ul {
+    list-style-position: inside;
+    padding: 10px;
+    margin: 0;
+}
+li {
+    padding: 0;
+    margin: 0;
+}
+#buttons {
+    text-align: right;
+}
+button {
+    transition-duration: 0.2s;
+    background-color: transparent;
+    height: 35px;
+    border: 1px solid white;
+    width: 30%;
+    color: white;
+    display: inline-block;
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-left: 10px;
+}
+button:disabled {
+    color : rgb(50, 50, 50);
+    border-color:rgb(50, 50, 50);
+}
+button:hover {
+    background-color: #ffffff;
+    color: black;
+  }
+button:active {
+    transform: translateY(2px);
+}
+input, select {
+    background-color: transparent;
+    border: 1px solid;
+	color: rgb(255, 255, 255);
+    margin: 5px;
+    padding: 5px;
+    outline: none;
+}
+select {
+    padding: 4px;
+    background-color: rgb(33, 33, 33);
+}
+input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    background-color:rgb(0, 0, 0);
+    color:rgb(0, 0, 0);
+    vertical-align: middle;
+}
+input[type="text"] {
+    width: 60%;
+}
+input[type="radio"] {
+    width: auto;
+    border: 1px solid darkgrey;
+    margin: 0;
+    padding: 10px;
+}
+input:focus {
+    outline: none;
+}              
+label {
+    display: inline-block;
+    width: 30%;
+    text-align: right;
+}
+#labelWindows, #labelLinux {
+    text-align: left;
+    width: auto;
+}
+.optional {
+    margin: 0;
+    padding: 0;
+}
+#mirror, #repository, #global, #command, #filters {
+    border: 1px solid darkgrey;
+    border-style: solid;
+    height: auto;
+    padding: 20px;
+}
+#commandPreview {
+    color: orange;
+    background-color: transparent;
+    padding: 20px;
+    resize: none;
+    outline: none;
+    border: 1px solid orange;
+    height: auto;
+    margin-bottom: 10px;
+}
+#info {
+    border: 1px solid darkgrey;
+    text-align: left;
+    background-color: transparent;
+    display: block;
+    padding: 10px;
+}

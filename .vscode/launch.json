@@ -1,0 +1,11 @@
+{
+    "configurations": [
+    {
+        "name": "Launch Chrome",
+        "request": "launch",
+        "type": "pwa-chrome",
+        "url": "file:///D:/Gareth/Dev/Source/Repos/mirrortoolconfigurator2/index.html",
+        "webRoot": "${workspaceFolder}"
+    }
+    ]
+}
