@@ -28,22 +28,22 @@ body {
 #commandPreview {
     font-family: "Lucida console";
     font-size: small;
-    color: #0076fd;
+    color: #00a0fd;
     background-color: rgb(3, 3, 3);
     white-space: pre-wrap;
     padding: 20px;
     resize: none;
     outline: none;
-    border: 1px solid #0076fd;
+    border: 1px solid #00a0fd;
     height: auto;
     margin-bottom: 10px;
 }
 a {
-    color: #0076fd;
+    color: #00a0fd;
     text-decoration: none;
 }
 a:hover {
-    color: #318cf5;
+    color: #5ac1fc;
 }
 h2 {
     text-align: center;
@@ -70,7 +70,7 @@ li {
 button {
     transition-duration: 0.2s;
     background-color: #0076fd;
-    border: 1px solid rgb(4, 53, 109);
+    border: 0;
     height: 30px;
     width: 230px;
     display: inline-block;
@@ -80,7 +80,7 @@ button {
 }
 button:disabled {
     color : rgb(0, 0, 0);
-    border: 1px solid rgb(24, 24, 24);
+    border: 0;
     background-color: rgb(53, 53, 53);
 }
 button:hover {
