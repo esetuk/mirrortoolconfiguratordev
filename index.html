@@ -20,16 +20,27 @@
             <h4>Command preview</h4>
             <div id="commandPreview" placeholder="Some mandatory parameter sections are disabled or some arguments are empty, please check your configuration." spellcheck="">
             </div> 
-            <input type="radio" id="enableWindows" name="platforms" value="Windows">
-            <label id="labelWindows" for="enableWindows">Windows</label>
-            <input type="radio" id="enableLinux" name="platforms" value="Linux">
-            <label id="labelLinux" for="enableLinux">Linux</label><br>
+            
             <div id="buttons">
                 <button type="button" id="copyButton">Copy to clipboard</button>
                 <button type="button" id="downloadButton">Download script</button>
             </div>
-            <h4>Mirror parameters</h4>
-            <input type="checkbox" id="enableMirror">
+            <div id="filters">
+                <label class="filterLabels">Filters:</label>
+                <input type="radio" id="enableWindows" name="platforms" value="Windows">
+                <label class="filterLabels" for="enableWindows">Windows</label>
+                <input type="radio" id="enableLinux" name="platforms" value="Linux">
+                <label class="filterLabels" for="enableLinux">Linux</label>
+                <input type="checkbox" id="enableMirror">
+                <label class="filterLabels" for="enableMirror">Mirror parameters</label>
+                <input type="checkbox" id="enableRepository">
+                <label class="filterLabels" for="enableRepository">Repository parameters</label>
+                <input type="checkbox" id="enableGlobal">
+                <label class="filterLabels" for="enableGlobal">Global parameters</label>
+                <input type="checkbox" id="enableOptional">
+                <label class="filterLabels" for="enableOptional">Optional parameters</label>
+                <a href="" id="resetLink">Reset</a>
+            </div>
             <div id="mirror">
                 <label class="labels" title="[required for module update] Type of mirror. Possible values (case insensitive): regular, pre-release, delayed.">mirrorType*</label>
                 <select id="mirrorType">
@@ -73,11 +84,9 @@
                     <br>
                     <label class="labels" title="[optional] Password used, when output directory is accessed using smb(e.g:\\hostname).">networkDrivePassword</label>
                     <input type="text" id="networkDrivePassword" placeholder="">
-                    <br>
                 </div>
             </div>
-            <h4>Repository parameters</h4>
-            <input type="checkbox" id="enableRepository">
+            
             <div id="repository">
                 <label class="labels" title="[required for repository update] Repository server for repository creation.">repositoryServer*</label>
                 <input type="text" id="repositoryServer" placeholder=""><br>
@@ -92,8 +101,7 @@
                     <input type="checkbox" id="trustDownloadedFilesInRepositoryTemp" placeholder=""><br>
                 </div>
             </div>
-                <h4>Global parameters</h4>
-                <input type="checkbox" id="enableGlobal">
+                
                 <div id="global">
                     <label class="labels" title="[optional] Http proxy address (fqdn or IP).">proxyHost</label>
                     <input type="text" id="proxyHost" placeholder="e.g.: proxy.domain.com or 10.0.0.10"><br>
@@ -104,8 +112,7 @@
                     <label class="labels" title="[optional] Http proxy password.">proxyPassword</label>
                     <input type="text" id="proxyPassword" placeholder=""><br>
                 </div>
-            <h4>Optional parameters</h4>
-            <input type="checkbox" id="enableOptional"><br>
+
     </div>
     <script type="text/javascript" src="src/main.js"></script>
 </body>

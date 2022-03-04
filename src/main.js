@@ -1,21 +1,5 @@
 let setDefaults = true,
-parameterList,
-//element aliases
-mirrorType = document.getElementById("mirrorType"),
-mirrorFileFormat = document.getElementById("mirrorFileFormat"),
-excludedProducts = document.getElementById("excludedProducts"),
-enableWindows = document.getElementById("enableWindows"),
-enableLinux = document.getElementById("enableLinux"),
-mirror = document.getElementById("mirror"),
-repository = document.getElementById("repository"),
-global = document.getElementById("global"),
-enableMirror = document.getElementById("enableMirror"),
-enableRepository = document.getElementById("enableRepository"),
-enableGlobal = document.getElementById("enableGlobal"),
-enableOptional = document.getElementById("enableOptional"),
-copyButton = document.getElementById("copyButton"),
-downloadButton = document.getElementById("downloadButton"),
-commandPreview = document.getElementById("commandPreview");
+parameterList;
 enableWindows.checked = true;
 function update() {
     let s = "",
@@ -105,9 +89,11 @@ function update() {
     if (isOutputValid > 0 || (!enableMirror.checked && !enableRepository.checked)) {
         copyButton.disabled = true;
         downloadButton.disabled = true;
+        commandPreview.disabled = true;
     } else {
         copyButton.disabled = false;
         downloadButton.disabled = false;
+        commandPreview.disabled = false;
     }
     //trim whitespace
     s = s.trim();
