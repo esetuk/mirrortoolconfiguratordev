@@ -98,7 +98,7 @@ function update() {
             pElement.placeholder = "This field cannot be blank";
             isOutputValid++
         } else {
-            pElement.style.borderColor = "darkgrey";
+            pElement.style.borderColor = "rgb(63, 63, 63)";
         }
     }
     //if the number of invalid fields are more than 0 or mandatory sections are disabled the disable the copy and download buttons, otherwise show them

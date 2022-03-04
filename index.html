@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-    <title>MirrorToolConfigurator BETA</title>
+    <title>MirrorToolConfigurator2</title>
     <meta charset="UTF-8" />
     <link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="main" class="noselect">
-            <h2>MirrorToolConfigurator BETA</h2>
+            <h2>MirrorToolConfigurator2</h2>
             <div id="info">
                 <ul>
                     <li>If you need help hover over each parameter name for a tip or follow the <a href="https://help.eset.com/protect_install/90/en-US/mirror_tool_windows.html" target="_blank">MirrorTool documentation.</a></li>
@@ -29,7 +29,7 @@
                 <button type="button" id="downloadButton">Download script</button>
             </div>
             <h4>Mirror parameters</h4>
-            <input type="checkbox" id="enableMirror"><br>
+            <input type="checkbox" id="enableMirror">
             <div id="mirror">
                 <label class="labels" title="[required for module update] Type of mirror. Possible values (case insensitive): regular, pre-release, delayed.">mirrorType*</label>
                 <select id="mirrorType">
@@ -77,7 +77,7 @@
                 </div>
             </div>
             <h4>Repository parameters</h4>
-            <input type="checkbox" id="enableRepository"><br>
+            <input type="checkbox" id="enableRepository">
             <div id="repository">
                 <label class="labels" title="[required for repository update] Repository server for repository creation.">repositoryServer*</label>
                 <input type="text" id="repositoryServer" placeholder=""><br>
@@ -93,7 +93,7 @@
                 </div>
             </div>
                 <h4>Global parameters</h4>
-                <input type="checkbox" id="enableGlobal"><br>
+                <input type="checkbox" id="enableGlobal">
                 <div id="global">
                     <label class="labels" title="[optional] Http proxy address (fqdn or IP).">proxyHost</label>
                     <input type="text" id="proxyHost" placeholder="e.g.: proxy.domain.com or 10.0.0.10"><br>

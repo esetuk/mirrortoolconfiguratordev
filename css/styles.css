@@ -1,7 +1,7 @@
 * {
     color: rgb(255, 255, 255);
     border-radius: 5px;
-    font-family: 'Trebuchet MS';
+    font-family: "Segoe UI",Helvetica,Arial,sans-serif;
 }
 body {
     background-color: rgb(0, 0, 0);
@@ -14,17 +14,40 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
     height: auto;
-    background-color: rgb(33, 33, 33);
-    border: 1px solid darkgrey;
+    background-color: rgb(24, 24, 24);
+    border: 1px solid rgb(63, 63, 63);
+}
+#info {
+    background-color: rgb(31, 30, 30);
+    border: 1px solid rgb(63, 63, 63);
+    font-size: small;
+    text-align: left;
+    display: block;
+    padding: 10px;
+}
+#commandPreview {
+    font-family: "Lucida console";
+    font-size: small;
+    color: #0076fd;
+    background-color: rgb(3, 3, 3);
+    white-space: pre-wrap;
+    padding: 20px;
+    resize: none;
+    outline: none;
+    border: 1px solid #0076fd;
+    height: auto;
+    margin-bottom: 10px;
 }
 a {
-    color: orange;
+    color: #0076fd;
     text-decoration: none;
+}
+a:hover {
+    color: #318cf5;
 }
 h2 {
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 0;
 }
 h1, h3, h4 {
     display: inline-block;
@@ -37,31 +60,31 @@ ul {
     margin: 0;
 }
 li {
-    padding: 0;
+    padding: 3px;
     margin: 0;
 }
 #buttons {
     text-align: right;
+    margin-bottom: 20px;
 }
 button {
     transition-duration: 0.2s;
-    background-color: transparent;
-    height: 35px;
-    border: 1px solid white;
-    width: 30%;
-    color: white;
+    background-color: #0076fd;
+    border: 1px solid rgb(4, 53, 109);
+    height: 30px;
+    width: 230px;
     display: inline-block;
     margin-bottom: 0;
     margin-top: 0;
     margin-left: 10px;
 }
 button:disabled {
-    color : rgb(92, 92, 92);
-    border-color:rgb(92, 92, 92);
+    color : rgb(0, 0, 0);
+    border: 1px solid rgb(24, 24, 24);
+    background-color: rgb(53, 53, 53);
 }
 button:hover {
-    background-color: #ffffff;
-    color: black;
+    background-color: #5eb3f8;
   }
 button:active {
     transform: translateY(2px);
@@ -69,32 +92,32 @@ button:active {
 input, select {
     background-color: transparent;
     border: 1px solid;
-	color: rgb(255, 255, 255);
     margin: 5px;
     padding: 5px;
     outline: none;
+    font-size: small;
 }
 select {
     padding: 4px;
-    background-color: rgb(33, 33, 33);
-    font-size: medium;
+    background-color: rgb(31, 30, 30);
+    font-size: small;
 }
 input[type="checkbox"] {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
     background-color:rgb(0, 0, 0);
     color:rgb(0, 0, 0);
     vertical-align: middle;
+    margin-right: 20px;
 }
 input[type="text"] {
     width: 50%;
-    font-size: medium;
 }
 input[type="radio"] {
     width: auto;
-    border: 1px solid darkgrey;
-    margin: 0;
-    padding: 10px;
+    border: 1px solid rgb(63, 63, 63);
+    vertical-align: middle;
+    margin-left: 0;
 }
 input:focus {
     outline: none;
@@ -103,36 +126,21 @@ label {
     display: inline-block;
     width: 40%;
     text-align: right;
-    font-size: medium;
+    font-size: small;
+    vertical-align: middle;
 }
 #labelWindows, #labelLinux {
     text-align: left;
     width: auto;
+    margin-right: 10px;
 }
 .optional {
     margin: 0;
     padding: 0;
 }
 #mirror, #repository, #global, #command, #filters {
-    border: 1px solid darkgrey;
-    border-style: solid;
+    border: 1px solid rgb(63, 63, 63);
+    background-color: rgb(31, 30, 30);
     height: auto;
     padding: 20px;
-}
-#commandPreview {
-    color: orange;
-    background-color: transparent;
-    padding: 20px;
-    resize: none;
-    outline: none;
-    border: 1px solid orange;
-    height: auto;
-    margin-bottom: 10px;
-}
-#info {
-    border: 1px solid darkgrey;
-    text-align: left;
-    background-color: transparent;
-    display: block;
-    padding: 10px;
 }
