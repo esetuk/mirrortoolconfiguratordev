@@ -5,9 +5,10 @@
 }
 #themeSwitcher {
     float: right;
-    opacity: 50%;
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
+    opacity: 5%;
+    vertical-align: bottom;
 }
 body {
     background-color: rgb(0, 0, 0);
@@ -15,31 +16,30 @@ body {
 }
 #main {
     width: 900px;
-    padding: 20px;
     margin: auto;
     margin-top: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
     height: auto;
     background-color: rgb(24, 24, 24);
     border: 1px solid rgb(63, 63, 63);
 }
 #info {
-    background-color: rgb(14, 44, 87);
-    border: 1px solid rgb(16, 86, 133);
+    background-color: rgb(13, 36, 97);
+    border: 1px solid rgb(45, 99, 216);
     font-size: small;
     text-align: left;
     display: block;
     padding: 20px;
 }
 #commandPreview {
-    font-family: "Lucida console";
-    font-size: small;
     background-color: rgb(3, 3, 3);
     white-space: pre-wrap;
-    padding: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     resize: none;
     outline: none;
-    height: auto;
     margin-bottom: 10px;
     margin-top: 20px;
     border: 1px solid rgb(63, 63, 63);
@@ -59,7 +59,6 @@ a:hover {
 h2 {
     text-align: center;
     margin-top: 0;
-    padding-left: 32px;
 }
 h1, h3, h4 {
     display: inline-block;
@@ -75,20 +74,20 @@ li {
     padding: 3px;
     margin: 0;
 }
+#labelEnablePretty {
+    height: auto;
+}
 #buttons {
     text-align: right;
     margin-top: 20px;
 }
+button:hover, #outputBox, label:hover {
+    color: orange;
+}
 button {
-    transition-duration: 0.2s;
-    border: 1px solid white;
     background-color: transparent;
-    height: 30px;
-    width: 230px;
-    display: inline-block;
-    margin-bottom: 0;
-    margin-top: 0;
-    margin-left: 20px;
+    border: 1px solid;
+    margin: 5px;
 }
 button:disabled {
     color : rgb(0, 0, 0);
@@ -102,18 +101,24 @@ button:hover {
 button:active {
     transform: translateY(2px);
 }
-input, select {
-    background-color: transparent;
-    border: 1px solid;
-    margin: 5px;
-    padding: 5px;
+input {
+    background-color: rgb(24, 24, 24);
     outline: none;
-    font-size: small;
+    border: 1px solid rgb(65, 65, 65);
+    width: 50px;
+    padding: 6px;
+    margin: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
 }
 select {
-    padding: 4px;
-    background-color: rgb(31, 30, 30);
-    font-size: small;
+    background-color: rgb(24, 24, 24);
+    overflow: hidden;
+    width: auto;
+    padding: 5px;
+    vertical-align: middle;
+    margin: 5px;
 }
 input[type="checkbox"] {
     width: 14px;
@@ -134,10 +139,70 @@ input[type="radio"] {
 }
 input:focus {
     outline: none;
-}              
+}
+#configuration {
+    border: 1px solid rgb(65, 65, 65);
+    padding: 20px;
+    margin-top: 20px;
+}
+#outputBox {
+    font-family: "Lucida console";
+    text-align: left;
+    white-space: pre-wrap;
+    border: 1px solid rgb(63, 63, 63);
+    width: auto;
+    background-color: black;
+    margin: 0;
+    padding: 20px;
+    height: auto;
+    word-wrap: break-word;
+    font-size: small;
+}
+table {
+    width: 100%;
+    text-align: left;
+    background-color: rgb(24, 24, 24);
+    font-size: small;
+}
+table, th, td {
+    border: 1px solid rgb(65, 65, 65);
+    border-collapse: collapse;
+    padding: 5px;
+    border-radius: 0;
+    cursor: default;
+}
+th {
+    text-align: center;
+}
+td {
+    width: auto;
+}
+#productSelector, #defaultsSelector {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.divider {
+    border-left: 3px solid rgb(65, 65, 65);
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
+.controls {
+    margin-top: 10px;
+    margin-bottom: 0;
+    text-align: right;
+    height: auto;
+    margin-right: -5px;
+    margin-bottom: -5px;
+}   
 label {
     display: inline-block;
-    width: 40%;
+    width: auto;
     text-align: right;
     font-size: small;
     vertical-align: middle;
@@ -146,7 +211,10 @@ label {
 #labelWindows, #labelLinux {
     width: auto;
 }
-.optional {
+#labelLinux {
+    margin-right: 10px;
+}
+#optional {
     margin: 0;
     padding: 0;
 }
@@ -165,14 +233,75 @@ label {
     width: auto;
 }
 #footer {
-    color: rgb(63, 63, 63);
-    text-align: center;
-    margin-top: 20px;
-}
-#github {
+    color:rgb(63, 63, 63);
     font-size: small;
-    text-align: right;
+    text-align: center;
+    margin-bottom: 20px;
 }
-#github a {
+#footer a {
     color: rgb(63, 63, 63);
+}
+#footer a:hover {
+    color: rgb(121, 116, 116);
+}
+.component {
+    width: auto;
+    display: inline-block;
+    margin: 5px;
+    border: 1px solid rgb(65, 65, 65);
+    padding: 10px;
+    background-color: rgb(39, 38, 38);
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+    text-align: left;
+}
+.box {
+    border: 1px solid rgb(65, 65, 65);
+    background-color: rgb(31, 30, 30);
+    padding: 20px;
+    margin: 20px;
+}
+#enablePrettyBox {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    margin-left: 5px;
+}
+.controls {
+    text-align: right;
+    width: auto;
+    height: auto;
+}
+.disable-select {
+    user-select: none; /* supported by Chrome and Opera */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
+}
+.removeIcon {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+colorParameter {
+    color: rgb(67, 166, 224);
+    font-family: "Lucida console";
+    font-size: small;
+}
+colorArgument {
+    color: rgb(224, 120, 102);
+    font-family: "Lucida console";
+    font-size: small;
+}
+colorStart {
+    color: rgb(199, 90, 153);
+    font-family: "Lucida console";
+    font-size: small;
+}
+colorWarn {
+    color: rgb(194, 71, 71);
+    font-family: "Lucida console";
+    font-size: small;
 }
