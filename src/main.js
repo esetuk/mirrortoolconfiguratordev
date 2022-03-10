@@ -1,7 +1,7 @@
 //Globals
 let setDefaults = true,
     parameterList;
-enableWindows.checked = true,
+    enableWindows.checked = true,
     isWindows = true,
     darkMode = true;
 //themeSwitcher.setAttribute("style", "filter: invert(100%)"); //Icon is black
@@ -115,12 +115,15 @@ function update() {
     enableMirror.checked ? mirror.style.display = "block" : mirror.style.display = "none";
     enableRepository.checked ? repository.style.display = "block" : repository.style.display = "none";
     enableGlobal.checked ? global.style.display = "block" : global.style.display = "none";
-    //Workaround for auto-sizing the command line preview box
-    commandPreview.setAttribute("style", "height: 0px");
-    commandPreview.setAttribute("style", "height:" + (commandPreview.scrollHeight) + "px;overflow-y:hidden;");
     setDefaults = false;
 }
 update();
+expand1.addEventListener("click", function() {
+    expandSection1.hidden = true;
+});
+expand2.addEventListener("click", function() {
+    expandSection2.hidden = true;
+});
 //Main form event listener to update the command preview
 main.addEventListener("input", function () { update(); });
 //Event listeners for reset query
@@ -228,29 +231,28 @@ addProduct.addEventListener("click", function () {
     }
 });
 //Event listener for set defaults
-//NOT WORKING
-// setDefaults.addEventListener("click", function () {
-//     if (jbIsAnyDefaultsSelected()) {
-//         //Set the default nodes
-//         let defaultNodes = ["languages", "os_types", "platforms"];
-//         //Iterate through each default node
-//         for (let i = 0; i < defaultNodes.length; i++) {
-//             //To get the correct column reference
-//             let offset = 3;
-//             //Check if filter is enabled, if so add the selected item into the cell
-//             if (document.getElementById("enable" + defaultNodes[i]).checked) {
-//                 table.rows[1].cells[i + offset].innerHTML = document.getElementById(defaultNodes[i]).options[document.getElementById(defaultNodes[i]).selectedIndex].text;
-//             } else {
-//                 //Otherwise add a blank
-//                 table.rows[1].cells[i + offset].innerHTML = "";
-//             }
-//         }
-//         //Add a text remove icon and ID
-//         table.rows[1].cells[7].innerHTML = `<p class="removeIcon">X</p>`;
-//         table.rows[1].cells[7].id = "clear";
-//         jbUpdate();
-//     }
-// });
+document.getElementById("setDefaults").addEventListener("click", function () {
+    if (jbIsAnyDefaultsSelected()) {
+        //Set the default nodes
+        let defaultNodes = ["languages", "os_types", "platforms"];
+        //Iterate through each default node
+        for (let i = 0; i < defaultNodes.length; i++) {
+            //To get the correct column reference
+            let offset = 3;
+            //Check if filter is enabled, if so add the selected item into the cell
+            if (document.getElementById("enable" + defaultNodes[i]).checked) {
+                table.rows[1].cells[i + offset].innerHTML = document.getElementById(defaultNodes[i]).options[document.getElementById(defaultNodes[i]).selectedIndex].text;
+            } else {
+                //Otherwise add a blank
+                table.rows[1].cells[i + offset].innerHTML = "";
+            }
+        }
+        //Add a text remove icon and ID
+        table.rows[1].cells[7].innerHTML = `<p class="removeIcon">X</p>`;
+        table.rows[1].cells[7].id = "clear";
+        jbUpdate();
+    }
+});
 //Event listener for the table
 table.addEventListener("click", function (e) {
     //Target the closest cell to the click

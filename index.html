@@ -8,35 +8,42 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <script type="text/javascript" src="src/clipboard.min.js"></script>
 </head>
-
 <body>
     <form id="main" class="noselect" spellcheck="false">
         <h2>MirrorToolConfigurator</h2>
-        <div class="box">
-        <div id="commandPreview"></div>
-        <div id="buttons">
-            <button type="button" id="copyButton">COPY</button>
-            <button type="button" id="downloadButton">DOWNLOAD</button>
+        <div class="layer1">
+            <h3>Command Line Configuration</h3>
+            <a class="expander" id="expand1" href="javascript:void(0)">▲</a>
+            <div id="expandSection1">
+        <div class="layer2">
+            <div id="commandPreview"></div>
+            <div class="controls">
+                <button type="button" id="copyButton">COPY</button>
+                <button type="button" id="downloadButton">DOWNLOAD</button>
+            </div>
         </div>
-    </div>
-        <div class="box" id="filters">
-            <label class="filterLabels">Platform:</label>
-            <input type="radio" id="enableWindows" name="platforms" value="Windows">
-            <label class="filterLabels" for="enableWindows">Windows</label>
-            <input type="radio" id="enableLinux" name="platforms" value="Linux">
-            <label id="labelLinux" class="filterLabels" for="enableLinux">Linux</label>
-            <label class="filterLabels">Parameters:</label>
-            <input type="checkbox" id="enableMirror">
-            <label class="filterLabels" for="enableMirror">Mirror</label>
-            <input type="checkbox" id="enableRepository">
-            <label class="filterLabels" for="enableRepository">Repository</label>
-            <input type="checkbox" id="enableGlobal">
-            <label class="filterLabels" for="enableGlobal">Global</label>
-            <input type="checkbox" id="enableOptional">
-            <label class="filterLabels" for="enableOptional">Optional</label>
-            <a href="javascript:void(0)" id="resetLink">Reset</a>
+        <div class="layer2" id="spacer1">
+            <div class="controls" id="filters">
+                <label>Platform:</label>
+                <input type="radio" id="enableWindows" name="enableWindows" value="Windows">
+                <label for="enableWindows">Windows</label>
+                <input type="radio" id="enableLinux" name="enableLinux" value="Linux">
+                <label id="labelLinux" for="enableLinux">Linux</label>
+                <div class="divider"></div>
+                <label>Parameters:</label>
+                <input type="checkbox" id="enableMirror">
+                <label for="enableMirror">Mirror</label>
+                <input type="checkbox" id="enableRepository">
+                <label for="enableRepository">Repository</label>
+                <input type="checkbox" id="enableGlobal">
+                <label for="enableGlobal">Global</label>
+                <input type="checkbox" id="enableOptional">
+                <label for="enableOptional">Optional</label>
+                <div class="divider"></div>
+                <button type="button" id="resetLink">RESET</button>
+            </div>
         </div>
-        <div class="box" id="mirror">
+        <div class="layer2" id="mirror">
             <label class="labels"
                 title="[required for module update] Type of mirror. Possible values (case insensitive): regular, pre-release, delayed.">mirrorType*</label>
             <select id="mirrorType">
@@ -95,8 +102,7 @@
                 <input type="text" id="networkDrivePassword" placeholder="">
             </div>
         </div>
-
-        <div class="box" id="repository">
+        <div class="layer2" id="repository">
             <label class="labels"
                 title="[required for repository update] Repository server for repository creation.">repositoryServer*</label>
             <input type="text" id="repositoryServer" placeholder=""><br>
@@ -115,7 +121,7 @@
                 <input type="checkbox" id="trustDownloadedFilesInRepositoryTemp" placeholder=""><br>
             </div>
         </div>
-        <div class="box" id="global">
+        <div class="layer2" id="global">
             <label class="labels" title="[optional] Http proxy address (fqdn or IP).">proxyHost</label>
             <input type="text" id="proxyHost" placeholder="e.g.: proxy.domain.com or 10.0.0.10"><br>
             <label class="labels" title="[optional] Http proxy port.">proxyPort</label>
@@ -125,21 +131,24 @@
             <label class="labels" title="[optional] Http proxy password.">proxyPassword</label>
             <input type="text" id="proxyPassword" placeholder=""><br>
         </div>
-
+    </div>
+</div>
+    <div class="layer1" id="spacer2">
+        <h3>JSON Filter Configuration</h3>
+        <a class="expander" id="expand2" href="javascript:void(0)">▲</a>
+        <div id="expandSection2">
         <form id="form" spellcheck="false" class="disable-select">
-            <div class="box">
+            <div class="layer2">
                 <div id="outputBox"></div>
                 <div class="controls">
                     <button id="jsonCopyButton" type="button">COPY</button>
                     <button id="jsonDownloadButton" type="button">DOWNLOAD</button>
                     <div class="divider"></div>
-                    <div id="enablePrettyBox">
                         <input type="checkbox" id="enablePretty"></input>
                         <label for="enablePretty" id="labelEnablePretty">Pretty</label>
-                    </div>
                 </div>
             </div>
-            <div class="box">
+            <div class="layer2" id="spacer1">
                 <div class="component">
                     <input type="checkbox" id="use_legacy"></input>
                     <label for="use_legacy">use_legacy</label>
@@ -150,6 +159,7 @@
                     <select name="name" id="name"></select>
                 </div>
                 <div class="component">
+
                     <input type="checkbox" id="enableapp_id"></input>
                     <label for="enableapp_id">app_id:</label>
                     <select name="app_id" id="app_id"></select>
@@ -187,7 +197,7 @@
                     <button id="addProduct" type="button" title="Add product">ADD PRODUCT</button>
                 </div>
             </div>
-            <div class="box">
+            <div class="layer2">
                 <table id="table">
                     <tr>
                         <th>app_id</th>
@@ -214,7 +224,9 @@
                     <button id="resetButton" type="button" title="Reset all">RESET</button>
                 </div>
             </div>
+        </div>
         </form>
+    </div>
     </form>
     <div id="footer">
         <a href="https://github.com/esetuk/mirrortoolconfigurator" target="_blank">Github</a> |
