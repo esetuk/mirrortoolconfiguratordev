@@ -46,10 +46,6 @@ body {
     margin: 20px;
     padding: 0;
 }
-#resetLink {
-    vertical-align: middle;
-    margin: 10px;
-}
 .expander {
     border: 0;
     font-size: medium;
@@ -189,7 +185,7 @@ td {
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.divider {
+.separator {
     border-left: 3px solid rgb(65, 65, 65);
     height: 20px;
     display: inline-block;

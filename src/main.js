@@ -1,11 +1,9 @@
 //Globals
 let setDefaults = true,
-    parameterList;
-    enableWindows.checked = true,
+    parameterList = [],
     isWindows = true,
     darkMode = true;
-    expandSection1.hidden = true;
-    expandSection2.hidden = true;
+    enableWindows.checked = true;
 //themeSwitcher.setAttribute("style", "filter: invert(100%)"); //Icon is black
 function update() {
     let command = "",
@@ -119,24 +117,21 @@ function update() {
     enableGlobal.checked ? global.style.display = "block" : global.style.display = "none";
     setDefaults = false;
 }
+openSection(1, true, false);
+openSection(2, false, false);
 update();
+function openSection(n, open, toggle){
+    let section = [expandSection1, expandSection2, expand1, expand2, "Command Line Configuration", "JSON Filter Configuration"];
+    toggle ? section[n - 1].hidden ? open = true : open = false : null;
+    open ? icon = "▲": icon = "▼";
+    section[n - 1].hidden = !open;
+    section[n + 1].innerHTML = section[n + 3] + " " + icon;
+}
 expand1.addEventListener("click", function() {
-    if (expandSection1.hidden){
-        expandSection1.hidden = false;
-        expand1.innerHTML = "Command Line Configuration ▼";
-    } else {
-        expandSection1.hidden = true;
-        expand1.innerHTML = "Command Line Configuration ▲";
-    }
+    openSection(1, null, true);
 });
 expand2.addEventListener("click", function() {
-    if (expandSection2.hidden){
-        expandSection2.hidden = false;
-        expand2.innerHTML = "JSON Filter Configuration ▼";
-    } else {
-        expandSection2.hidden = true;
-        expand2.innerHTML = "JSON Filter Configuration ▲";
-    }
+    openSection(2, null, true);
 });
 //Main form event listener to update the command preview
 main.addEventListener("input", function () { update(); });
@@ -180,9 +175,9 @@ function resetQuestion() {
 }
 //Read in products.csv (obtained by running MirrorTool with --dryRun parameter) and split it by each new line/carraige return
 temp = readTextFile("https://raw.githubusercontent.com/esetuk/jsonbuilder/master/products.csv").split(/[\r\n]+/),
-    products = [],
-    //Main nodes (exclude path as this is not required)
-    nodes = ["app_id", "name", "version", "languages", "os_types", "platforms", "legacy"];
+products = [],
+//Main nodes (exclude path as this is not required)
+nodes = ["app_id", "name", "version", "languages", "os_types", "platforms", "legacy"];
 //Iterate through each line
 for (i = 0; i < temp.length; i++) {
     //Split the lines by comma seperator and remove the path
@@ -222,7 +217,7 @@ addProduct.addEventListener("click", function () {
     if (isAnythingSelected()) {
         //Get the rows and columns count
         let columnCount = nodes.length,
-            rowCount = table.rows.length;
+        rowCount = table.rows.length;
         let row = table.insertRow(rowCount);
         //Iterate through each node
         for (let i = 0; i < nodes.length + 1; i++) {
@@ -352,7 +347,7 @@ function jbGetJSON() {
     //Set the space value \t=tab ""=all on the same line
     enablePretty.checked ? json_space = "\t" : json_space = "";
     let json_use_legacy = use_legacy.checked,
-        json_defaults_languages, json_defaults_platforms, json_defaults_os_types, json_products_app_id, json_products_name, json_products_version, json_product_languages, json_products_platforms, json_products_os_types, json_products, json_nodes = {}, products = [], defaults = [];
+    json_defaults_languages, json_defaults_platforms, json_defaults_os_types, json_products_app_id, json_products_name, json_products_version, json_product_languages, json_products_platforms, json_products_os_types, json_products, json_nodes = {}, products = [], defaults = [];
     //Iterate through defaults row and add this to json_nodes array
     for (i = 3; i < 6; i++) {
         if (table.rows[1].cells[i].innerHTML != "") json_nodes[nodes[i]] = table.rows[1].cells[i].innerHTML;
