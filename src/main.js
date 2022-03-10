@@ -4,6 +4,8 @@ let setDefaults = true,
     enableWindows.checked = true,
     isWindows = true,
     darkMode = true;
+    expandSection1.hidden = true;
+    expandSection2.hidden = true;
 //themeSwitcher.setAttribute("style", "filter: invert(100%)"); //Icon is black
 function update() {
     let command = "",
@@ -119,10 +121,22 @@ function update() {
 }
 update();
 expand1.addEventListener("click", function() {
-    expandSection1.hidden = true;
+    if (expandSection1.hidden){
+        expandSection1.hidden = false;
+        expand1.innerHTML = "Command Line Configuration ▼";
+    } else {
+        expandSection1.hidden = true;
+        expand1.innerHTML = "Command Line Configuration ▲";
+    }
 });
 expand2.addEventListener("click", function() {
-    expandSection2.hidden = true;
+    if (expandSection2.hidden){
+        expandSection2.hidden = false;
+        expand2.innerHTML = "JSON Filter Configuration ▼";
+    } else {
+        expandSection2.hidden = true;
+        expand2.innerHTML = "JSON Filter Configuration ▲";
+    }
 });
 //Main form event listener to update the command preview
 main.addEventListener("input", function () { update(); });
