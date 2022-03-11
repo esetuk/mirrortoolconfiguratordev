@@ -19,7 +19,7 @@
             <div id="expandSection1">
                 <div class="spacer"></div>
                 <div class="layer2">
-                    <div id="commandPreview"></div>
+                    <div id="outputBox"></div>
                     <div class="controls">
                         <button type="button" id="copyButton">COPY</button>
                         <button type="button" id="downloadButton">DOWNLOAD</button>
@@ -43,7 +43,7 @@
                         <input type="checkbox" id="enableOptional">
                         <label for="enableOptional">Optional</label>
                         <div class="separator"></div>
-                        <button type="button" id="resetLink">RESET</button>
+                        <button type="button" id="resetButton">RESET</button>
                     </div>
                 </div>
                 <div class="layer2" id="mirror">
@@ -104,7 +104,7 @@
                         <br>
                         <label class="labels"
                             title="[optional] Password used, when output directory is accessed using smb(e.g:\\hostname).">networkDrivePassword</label>
-                        <input type="text" id="networkDrivePassword" placeholder="">
+                        <input type="password" id="networkDrivePassword" placeholder="">
                     </div>
                 </div>
                 <div class="layer2" id="repository">
@@ -120,7 +120,7 @@
                     <div class="optional">
                         <label class="labels"
                             title="[optional] Path to filter file in json format. Parameter compatibilityVersion has to be higher than 7.1.0.0 to run program.">filterFilePath</label>
-                        <input type="text" id="filterFilePath" placeholder=""><br>
+                        <input type="text" id="filterFilePath" placeholder=""><a href="javascript:openSection(2, true, false);">configure</a><br>
                         <label class="labels"
                             title=" [optional] If set, hashes on already downloaded files are not checked.">trustDownloadedFilesInRepositoryTemp</label>
                         <input type="checkbox" id="trustDownloadedFilesInRepositoryTemp" placeholder=""><br>
@@ -134,7 +134,7 @@
                     <label class="labels" title="[optional] Http proxy username.">proxyUsername</label>
                     <input type="text" id="proxyUsername" placeholder=""><br>
                     <label class="labels" title="[optional] Http proxy password.">proxyPassword</label>
-                    <input type="text" id="proxyPassword" placeholder=""><br>
+                    <input type="password" id="proxyPassword" placeholder=""><br>
                 </div>
             </div>
         </div>
@@ -146,10 +146,10 @@
                 <div class="spacer"></div>
                 <form id="form" spellcheck="false">
                     <div class="layer2">
-                        <div id="outputBox"></div>
+                        <div id="outputBox2"></div>
                         <div class="controls">
-                            <button id="jsonCopyButton" type="button">COPY</button>
-                            <button id="jsonDownloadButton" type="button">DOWNLOAD</button>
+                            <button id="copyButton2" type="button">COPY</button>
+                            <button id="downloadButton2" type="button">DOWNLOAD</button>
                             <div class="separator"></div>
                             <input type="checkbox" id="enablePretty"></input>
                             <label for="enablePretty" id="labelEnablePretty">Pretty</label>
@@ -197,11 +197,11 @@
                             <select name="legacy" id="legacy"></select>
                         </div>
                         <div class="controls">
-                            <button id="selectAll" type="button" title="Select all">SELECT ALL</button>
-                            <button id="clearFilters" type="button" title="Select none">SELECT NONE</button>
+                            <button id="buttonSelectAll2" type="button" title="Select all">SELECT ALL</button>
+                            <button id="buttonClearFilters2" type="button" title="Select none">SELECT NONE</button>
                             <div class="separator"></div>
-                            <button id="setDefaults" type="button" title="Set defaults">SET DEFAULTS</button>
-                            <button id="addProduct" type="button" title="Add product">ADD PRODUCT</button>
+                            <button id="buttonSetDefaults2" type="button" title="Set defaults">SET DEFAULTS</button>
+                            <button id="buttonAddProduct2" type="button" title="Add product">ADD PRODUCT</button>
                         </div>
                     </div>
                     <div class="layer2">
@@ -228,7 +228,7 @@
                             </tr>
                         </table>
                         <div class="controls">
-                            <button id="resetButton" type="button" title="Reset all">RESET</button>
+                            <button id="buttonReset2" type="button" title="Reset JSON configuration">RESET</button>
                         </div>
                     </div>
             </div>
@@ -239,7 +239,7 @@
         <a href="https://github.com/esetuk/mirrortoolconfigurator" target="_blank">Github</a> |
         <a href="https://help.eset.com/protect_install/90/en-US/mirror_tool_windows.html" target="_blank">MirrorTool</a>
     </div>
+    <div id="hidden"></div>
     <script type="text/javascript" src="src/main.js"></script>
 </body>
-
 </html>

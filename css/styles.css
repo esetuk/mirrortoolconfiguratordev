@@ -3,86 +3,13 @@
     border-radius: 5px;
     font-family: "Segoe UI",Helvetica,Arial,sans-serif;
 }
-#themeSwitcher {
-    float: right;
-    width: 24px;
-    height: 24px;
-    opacity: 5%;
-    vertical-align: bottom;
-}
-body {
-    background-color: rgb(0, 0, 0);
-    margin: auto;
-}
-#main {
-    width: 1000px;
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    padding: 20px;
-    height: auto;
-    background-color: rgb(20, 20, 20);
-    border: 1px solid rgb(63, 63, 63);
-}
-#info {
-    background-color: rgb(13, 36, 97);
-    border: 1px solid rgb(45, 99, 216);
-    font-size: small;
-    text-align: left;
-    display: block;
-    padding: 20px;
-}
-#commandPreview {
-    font-family: "Lucida console";
-    background-color: rgb(3, 3, 3);
-    white-space: pre-wrap;
-    resize: none;
-    outline: none;
-    border: 1px solid rgb(63, 63, 63);
-    padding: 20px;
-    margin-bottom: 10px;
-}
-.spacer {
-    margin: 20px;
-    padding: 0;
-}
-.expander {
-    border: 0;
-    font-size: medium;
-    font-weight: bold;
-}
-.expander:hover {
-    background-color: transparent;
-    color: white;
-}
-.heading {
-    vertical-align: middle;
-    height: 30px;
-    text-align: center;
-}
 h2 {
     text-align: center;
     margin-top: 0;
-    width: auto;
-}
-h1, h3, h4 {
-    margin-top: 0;
-    text-align: center;
-    width: auto;
-    display: inline-block;
-}
-ul {
-    list-style-position: inside;
-    padding: 10px;
-    margin: 0;
-}
-li {
-    padding: 3px;
-    margin: 0;
 }
 button {
     background-color: transparent;
-    border: 1px solid;
+    border: 1px solid white;
     margin: 3px;
     vertical-align: middle;
     padding: 3px;
@@ -90,14 +17,13 @@ button {
     padding-right: 6px;
 }
 button:disabled {
-    color : rgb(0, 0, 0);
-    border: 0;
-    background-color: rgb(53, 53, 53);
+    color : rgb(87, 87, 87);
+    border: 1px solid;
 }
-button:hover {
+button:enabled:hover {
     background-color: #ffffff;
     color: black;
-  }
+}
 button:active {
     transform: translateY(1px);
 }
@@ -113,7 +39,7 @@ input {
     background-color: rgb(24, 24, 24);
     outline: none;
     border: 1px solid rgb(65, 65, 65);
-    width: 50px;
+    width: 50%;
     padding: 6px;
     margin: 5px;
     display: inline-block;
@@ -128,9 +54,6 @@ input[type="checkbox"] {
     vertical-align: middle;
     margin-left: 5px;
 }
-input[type="text"] {
-    width: 50%;
-}
 input[type="radio"] {
     width: auto;
     border: 1px solid rgb(63, 63, 63);
@@ -141,32 +64,12 @@ input[type="radio"] {
 input:focus {
     outline: none;
 }
-#configuration {
-    border: 1px solid rgb(65, 65, 65);
-    padding: 20px;
-    margin-top: 20px;
-}
-#outputBox {
-    font-family: "Lucida console";
-    color: orange;
-    text-align: left;
-    white-space: pre-wrap;
-    border: 1px solid rgb(63, 63, 63);
-    width: auto;
-    background-color: black;
-    margin: 0;
-    margin-bottom: 10px;
-    padding: 20px;
-    height: auto;
-    word-wrap: break-word;
-    font-size: small;
-}
 table {
     width: 100%;
     text-align: left;
     background-color: rgb(24, 24, 24);
     font-size: small;
-    margin-bottom: 10px;
+    
 }
 table, th, td {
     border: 1px solid rgb(65, 65, 65);
@@ -181,9 +84,49 @@ th {
 td {
     width: auto;
 }
-#productSelector, #defaultsSelector {
-    margin-top: 20px;
-    margin-bottom: 20px;
+label {
+    display: inline-block;
+    width: auto;
+    text-align: right;
+    font-size: small;
+    vertical-align: middle;
+    margin-bottom: 0;
+}
+body {
+    background-color: rgb(0, 0, 0);
+    margin: auto;
+}
+a {
+    color: rgb(90, 87, 87);
+    font-size: small;
+}
+a:hover {
+    color: rgb(255, 255, 255);
+}
+.disable-select {
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
+}
+.spacer {
+    margin: 20px;
+    padding: 0;
+}
+.expander {
+    border: 0;
+    font-size: medium;
+    font-weight: bold;
+}
+.expander:enabled:hover {
+    background-color: transparent;
+    color: white;
+}
+.heading {
+    vertical-align: middle;
+    height: 30px;
+    text-align: center;
 }
 .separator {
     border-left: 3px solid rgb(65, 65, 65);
@@ -193,16 +136,74 @@ td {
     margin-left: 5px;
     margin-right: 5px;
 }
-label {
-    display: inline-block;
-    width: auto;
-    text-align: right;
-    font-size: small;
-    vertical-align: middle;
-    margin-bottom: 0;
-}
 .labels {
     width: 300px;
+}
+.component {
+    width: auto;
+    display: inline-block;
+    margin: 5px;
+    border: 1px solid rgb(65, 65, 65);
+    padding: 10px;
+    background-color: rgb(35, 35, 35);
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+    text-align: left;
+}
+.layer1 {
+    border: 1px solid rgb(65, 65, 65);
+    background-color: rgb(25, 25, 25);
+    padding: 20px;
+}
+.layer2 {
+    border: 1px solid rgb(65, 65, 65);
+    background-color: rgb(30, 30, 30);
+    padding: 20px;
+}
+.controls {
+    text-align: right;
+    width: auto;
+    height: auto;
+    margin-top: 10px;
+}
+#main {
+    width: 900px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 20px;
+    height: auto;
+    background-color: rgb(20, 20, 20);
+    border: 1px solid rgb(63, 63, 63);
+}
+#outputBox {
+    font-family: "Lucida console";
+    background-color: rgb(3, 3, 3);
+    white-space: pre-wrap;
+    resize: none;
+    outline: none;
+    border: 1px solid rgb(63, 63, 63);
+    padding: 20px;
+    margin-bottom: 10px;
+}
+#outputBox2 {
+    font-family: "Lucida console";
+    color: orange;
+    text-align: left;
+    white-space: pre-wrap;
+    border: 1px solid rgb(63, 63, 63);
+    width: auto;
+    background-color: black;
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 20px;
+    height: auto;
+    word-wrap: break-word;
+    font-size: small;
+}
+#repository, #global {
+    margin-top: 20px;
 }
 #optional {
     margin: 0;
@@ -214,49 +215,15 @@ label {
     text-align: center;
     margin-bottom: 10px;
 }
-#footer a {
-    color: rgb(63, 63, 63);
-}
-#footer a:hover {
-    color: rgb(121, 116, 116);
-}
-.component {
-    width: auto;
-    display: inline-block;
-    margin: 5px;
-    border: 1px solid rgb(65, 65, 65);
-    padding: 10px;
-    background-color: rgb(50, 50, 50);
-    height: 40px;
-    line-height: 40px;
-    vertical-align: middle;
-    text-align: left;
-}
 #filters {
     margin-top: 0;
     text-align: center;
-}
-.layer1 {
-    border: 1px solid rgb(65, 65, 65);
-    background-color: rgb(30, 30, 30);
-    padding: 20px;
-}
-.layer2 {
-    border: 1px solid rgb(65, 65, 65);
-    background-color: rgb(40, 40, 40);
-    padding: 20px;
 }
 #enablePrettyBox {
     display: inline-block;
     width: auto;
     margin: 0;
     margin-left: 5px;
-}
-.controls {
-    text-align: right;
-    width: auto;
-    height: auto;
-    margin-top: 10px;
 }
 #spacer1 {
     margin-top: 20px;
@@ -265,15 +232,8 @@ label {
 #spacer2 {
     margin-top: 20px;
 }
-#repository, #global {
-    margin-top: 20px;
-}
-.disable-select {
-    user-select: none; /* supported by Chrome and Opera */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-   -moz-user-select: none; /* Firefox */
-   -ms-user-select: none; /* Internet Explorer/Edge */
+#hidden {
+    visibility: hidden;
 }
 .removeIcon {
     margin: 0;
@@ -290,6 +250,11 @@ colorArgument {
     font-family: "Lucida console";
     font-size: small;
 }
+colorPassword {
+    color: rgb(180, 147, 57);
+    font-family: "Lucida console";
+    font-size: small;
+}
 colorStart {
     color: rgb(199, 90, 153);
     font-family: "Lucida console";
@@ -299,7 +264,4 @@ colorWarn {
     color: rgb(194, 71, 71);
     font-family: "Lucida console";
     font-size: small;
-}
-a {
-    text-decoration: none;
 }
