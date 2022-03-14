@@ -8,231 +8,238 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <script type="text/javascript" src="src/clipboard.min.js"></script>
 </head>
+
 <body>
-    <form id="main" class="noselect" spellcheck="false">
+    <form id="main" class="disable-select" spellcheck="false">
         <h2>MirrorToolConfigurator</h2>
         <div class="layer1">
-            <h3>Command Line Configuration</h3>
-            <a class="expander" id="expand1" href="javascript:void(0)">▲</a>
+            <div class="heading">
+                <button type="button" class="expander" id="expand1">Command Line Configuration ▲</button>
+            </div>
             <div id="expandSection1">
-        <div class="layer2">
-            <div id="commandPreview"></div>
-            <div class="controls">
-                <button type="button" id="copyButton">COPY</button>
-                <button type="button" id="downloadButton">DOWNLOAD</button>
-            </div>
-        </div>
-        <div class="layer2" id="spacer1">
-            <div class="controls" id="filters">
-                <label>Platform:</label>
-                <input type="radio" id="enableWindows" name="enableWindows" value="Windows">
-                <label for="enableWindows">Windows</label>
-                <input type="radio" id="enableLinux" name="enableLinux" value="Linux">
-                <label id="labelLinux" for="enableLinux">Linux</label>
-                <div class="divider"></div>
-                <label>Parameters:</label>
-                <input type="checkbox" id="enableMirror">
-                <label for="enableMirror">Mirror</label>
-                <input type="checkbox" id="enableRepository">
-                <label for="enableRepository">Repository</label>
-                <input type="checkbox" id="enableGlobal">
-                <label for="enableGlobal">Global</label>
-                <input type="checkbox" id="enableOptional">
-                <label for="enableOptional">Optional</label>
-                <div class="divider"></div>
-                <button type="button" id="resetLink">RESET</button>
-            </div>
-        </div>
-        <div class="layer2" id="mirror">
-            <label class="labels"
-                title="[required for module update] Type of mirror. Possible values (case insensitive): regular, pre-release, delayed.">mirrorType*</label>
-            <select id="mirrorType">
-                <option value="" disabled="disabled" selected="selected">Please select one</option>
-                <option value="regular">regular</option>
-                <option value="pre-release">pre-release</option>
-                <option value="delayed">delayed</option>
-            </select><br>
-            <label class="labels"
-                title="[required for module update] Files will be downloaded to this directory to create mirror in output directory.">intermediateUpdateDirectory*</label>
-            <input type="text" id="intermediateUpdateDirectory" placeholder=""><br>
-            <label class="labels"
-                title="[required for module update] Directory where mirror will be created.">outputDirectory*</label>
-            <input type="text" id="outputDirectory" placeholder=""><br>
-            <label class="labels"
-                title="[required for module update] Offline license file.">offlineLicenseFilename*</label>
-            <input type="text" id="offlineLicenseFilename" placeholder=""><br />
-            <div class="optional">
-                <label class="labels"
-                    title="[optional] Disable creating mirror for specified products.">excludedProducts</label>
-                <select id="excludedProducts">
-                    <option value="none">none</option>
-                    <option value="ep4 ep5 ep6 era6 ep7 ep8">8 or lower</option>
-                    <option value="ep4 ep5 ep6 era6 ep7">7 or lower</option>
-                    <option value="ep4 ep5 ep6 era6">6 or lower</option>
-                    <option value="ep4 ep5">5 or lower</option>
-                    <option value="ep4">4 or lower</option>
-                </select><br>
-                <label class="labels"
-                    title="[optional] If set, only level upgrades will be downloaded (nano/continuous updates will not be downloaded).">mirrorOnlyLevelUpdates</label>
-                <input type="checkbox" id="mirrorOnlyLevelUpdates"><br>
-                <label class="labels"
-                    title="[optional] Specifies which type of update files will be downloaded. Possible values (case insensitive): dll, dat.">mirrorFileFormat</label>
-                <select id="mirrorFileFormat">
-                    <option value="none">none</option>
-                    <option value="dat"
-                        title="Use this value if you have environment only with ESET security product versions 6.6 and later.">
-                        dat (>= v6.6 only)</option>
-                    <option value="dll"
-                        title="Use this value if you have environment only with ESET security product versions 6.5 and older.">
-                        dll (<= v6.5 only)</option>
-                </select><br>
-                <label class="labels" title="[optional] Version of compatible products.">compatibilityVersion</label>
-                <input type="text" id="compatibilityVersion" placeholder="e.g. x.x (9.0) or x.x.x.x (9.0.2030.0)">
-                <br>
-                <label class="labels"
-                    title="[optional] Update server. (e.g.: http://update.eset.com/eset_upd/ep6/) Mirror will be created in output directory, only specified path in server will be mirrored.">updateServer</label>
-                <input type="text" id="updateServer" placeholder="e.g. http://update.eset.com/eset_upd/ep6/">
-                <br>
-                <label class="labels"
-                    title="[optional] Username used, when output directory is accessed using smb(e.g:\\hostname).">networkDriveUsername</label>
-                <input type="text" id="networkDriveUsername" placeholder="">
-                <br>
-                <label class="labels"
-                    title="[optional] Password used, when output directory is accessed using smb(e.g:\\hostname).">networkDrivePassword</label>
-                <input type="text" id="networkDrivePassword" placeholder="">
-            </div>
-        </div>
-        <div class="layer2" id="repository">
-            <label class="labels"
-                title="[required for repository update] Repository server for repository creation.">repositoryServer*</label>
-            <input type="text" id="repositoryServer" placeholder=""><br>
-            <label class="labels"
-                title="[required for repository update] Files will be downloaded to this directory to create offline mirror in output directory.">intermediateRepositoryDirectory*</label>
-            <input type="text" id="intermediateRepositoryDirectory" placeholder=""><br>
-            <label class="labels"
-                title="[required for repository update] Directory where offline repository will be created.">outputRepositoryDirectory*</label>
-            <input type="text" id="outputRepositoryDirectory" placeholder=""><br>
-            <div class="optional">
-                <label class="labels"
-                    title="[optional] Path to filter file in json format. Parameter compatibilityVersion has to be higher than 7.1.0.0 to run program.">filterFilePath</label>
-                <input type="text" id="filterFilePath" placeholder=""><br>
-                <label class="labels"
-                    title=" [optional] If set, hashes on already downloaded files are not checked.">trustDownloadedFilesInRepositoryTemp</label>
-                <input type="checkbox" id="trustDownloadedFilesInRepositoryTemp" placeholder=""><br>
-            </div>
-        </div>
-        <div class="layer2" id="global">
-            <label class="labels" title="[optional] Http proxy address (fqdn or IP).">proxyHost</label>
-            <input type="text" id="proxyHost" placeholder="e.g.: proxy.domain.com or 10.0.0.10"><br>
-            <label class="labels" title="[optional] Http proxy port.">proxyPort</label>
-            <input type="text" id="proxyPort" placeholder=""><br>
-            <label class="labels" title="[optional] Http proxy username.">proxyUsername</label>
-            <input type="text" id="proxyUsername" placeholder=""><br>
-            <label class="labels" title="[optional] Http proxy password.">proxyPassword</label>
-            <input type="text" id="proxyPassword" placeholder=""><br>
-        </div>
-    </div>
-</div>
-    <div class="layer1" id="spacer2">
-        <h3>JSON Filter Configuration</h3>
-        <a class="expander" id="expand2" href="javascript:void(0)">▲</a>
-        <div id="expandSection2">
-        <form id="form" spellcheck="false" class="disable-select">
-            <div class="layer2">
-                <div id="outputBox"></div>
-                <div class="controls">
-                    <button id="jsonCopyButton" type="button">COPY</button>
-                    <button id="jsonDownloadButton" type="button">DOWNLOAD</button>
-                    <div class="divider"></div>
-                        <input type="checkbox" id="enablePretty"></input>
-                        <label for="enablePretty" id="labelEnablePretty">Pretty</label>
+                <div class="spacer"></div>
+                <div class="layer2">
+                    <div id="outputBox"></div>
+                    <div class="controls">
+                        <button type="button" id="copyButton">COPY</button>
+                        <button type="button" id="downloadButton">DOWNLOAD</button>
+                    </div>
+                </div>
+                <div class="layer2" id="spacer1">
+                    <div class="controls" id="filters">
+                        <label>Platform:</label>
+                        <input type="radio" id="enableWindows" name="radioPlatform" value="Windows">
+                        <label for="enableWindows">Windows</label>
+                        <input type="radio" id="enableLinux" name="radioPlatform" value="Linux">
+                        <label for="enableLinux">Linux</label>
+                        <div class="separator"></div>
+                        <label>Parameters:</label>
+                        <input type="checkbox" id="enableMirror">
+                        <label for="enableMirror">Mirror</label>
+                        <input type="checkbox" id="enableRepository">
+                        <label for="enableRepository">Repository</label>
+                        <input type="checkbox" id="enableGlobal">
+                        <label for="enableGlobal">Global</label>
+                        <input type="checkbox" id="enableOptional">
+                        <label for="enableOptional">Optional</label>
+                        <div class="separator"></div>
+                        <button type="button" id="resetButton">RESET</button>
+                    </div>
+                </div>
+                <div class="layer2" id="mirror">
+                    <label class="labels"
+                        title="[required for module update] Type of mirror. Possible values (case insensitive): regular, pre-release, delayed.">mirrorType*</label>
+                    <select id="mirrorType">
+                        <option value="" disabled="disabled" selected="selected">Please select one</option>
+                        <option value="regular">regular</option>
+                        <option value="pre-release">pre-release</option>
+                        <option value="delayed">delayed</option>
+                    </select><br>
+                    <label class="labels"
+                        title="[required for module update] Files will be downloaded to this directory to create mirror in output directory.">intermediateUpdateDirectory*</label>
+                    <input type="text" id="intermediateUpdateDirectory" placeholder=""><br>
+                    <label class="labels"
+                        title="[required for module update] Directory where mirror will be created.">outputDirectory*</label>
+                    <input type="text" id="outputDirectory" placeholder=""><br>
+                    <label class="labels"
+                        title="[required for module update] Offline license file.">offlineLicenseFilename*</label>
+                    <input type="text" id="offlineLicenseFilename" placeholder=""><br />
+                    <div class="optional">
+                        <label class="labels"
+                            title="[optional] Disable creating mirror for specified products.">excludedProducts</label>
+                        <select id="excludedProducts">
+                            <option value="none">none</option>
+                            <option value="ep4 ep5 ep6 era6 ep7 ep8">8 or lower</option>
+                            <option value="ep4 ep5 ep6 era6 ep7">7 or lower</option>
+                            <option value="ep4 ep5 ep6 era6">6 or lower</option>
+                            <option value="ep4 ep5">5 or lower</option>
+                            <option value="ep4">4 or lower</option>
+                        </select><br>
+                        <label class="labels"
+                            title="[optional] If set, only level upgrades will be downloaded (nano/continuous updates will not be downloaded).">mirrorOnlyLevelUpdates</label>
+                        <input type="checkbox" id="mirrorOnlyLevelUpdates"><br>
+                        <label class="labels"
+                            title="[optional] Specifies which type of update files will be downloaded. Possible values (case insensitive): dll, dat.">mirrorFileFormat</label>
+                        <select id="mirrorFileFormat">
+                            <option value="none">none</option>
+                            <option value="dat"
+                                title="Use this value if you have environment only with ESET security product versions 6.6 and later.">
+                                dat (>= v6.6 only)</option>
+                            <option value="dll"
+                                title="Use this value if you have environment only with ESET security product versions 6.5 and older.">
+                                dll (<= v6.5 only)</option>
+                        </select><br>
+                        <label class="labels"
+                            title="[optional] Version of compatible products.">compatibilityVersion</label>
+                        <input type="text" id="compatibilityVersion"
+                            placeholder="e.g. x.x (9.0) or x.x.x.x (9.0.2030.0)">
+                        <br>
+                        <label class="labels"
+                            title="[optional] Update server. (e.g.: http://update.eset.com/eset_upd/ep6/) Mirror will be created in output directory, only specified path in server will be mirrored.">updateServer</label>
+                        <input type="text" id="updateServer" placeholder="e.g. http://update.eset.com/eset_upd/ep6/">
+                        <br>
+                        <label class="labels"
+                            title="[optional] Username used, when output directory is accessed using smb(e.g:\\hostname).">networkDriveUsername</label>
+                        <input type="text" id="networkDriveUsername" placeholder="">
+                        <br>
+                        <label class="labels"
+                            title="[optional] Password used, when output directory is accessed using smb(e.g:\\hostname).">networkDrivePassword</label>
+                        <input type="password" id="networkDrivePassword" placeholder="">
+                    </div>
+                </div>
+                <div class="layer2" id="repository">
+                    <label class="labels"
+                        title="[required for repository update] Repository server for repository creation.">repositoryServer*</label>
+                    <input type="text" id="repositoryServer" placeholder=""><br>
+                    <label class="labels"
+                        title="[required for repository update] Files will be downloaded to this directory to create offline mirror in output directory.">intermediateRepositoryDirectory*</label>
+                    <input type="text" id="intermediateRepositoryDirectory" placeholder=""><br>
+                    <label class="labels"
+                        title="[required for repository update] Directory where offline repository will be created.">outputRepositoryDirectory*</label>
+                    <input type="text" id="outputRepositoryDirectory" placeholder=""><br>
+                    <div class="optional">
+                        <label class="labels"
+                            title="[optional] Path to filter file in json format. Parameter compatibilityVersion has to be higher than 7.1.0.0 to run program.">filterFilePath</label>
+                        <input type="text" id="filterFilePath" placeholder=""><a href="javascript:openSection(2, true, false);">configure</a><br>
+                        <label class="labels"
+                            title=" [optional] If set, hashes on already downloaded files are not checked.">trustDownloadedFilesInRepositoryTemp</label>
+                        <input type="checkbox" id="trustDownloadedFilesInRepositoryTemp" placeholder=""><br>
+                    </div>
+                </div>
+                <div class="layer2" id="global">
+                    <label class="labels" title="[optional] Http proxy address (fqdn or IP).">proxyHost</label>
+                    <input type="text" id="proxyHost" placeholder="e.g.: proxy.domain.com or 10.0.0.10"><br>
+                    <label class="labels" title="[optional] Http proxy port.">proxyPort</label>
+                    <input type="text" id="proxyPort" placeholder=""><br>
+                    <label class="labels" title="[optional] Http proxy username.">proxyUsername</label>
+                    <input type="text" id="proxyUsername" placeholder=""><br>
+                    <label class="labels" title="[optional] Http proxy password.">proxyPassword</label>
+                    <input type="password" id="proxyPassword" placeholder=""><br>
                 </div>
             </div>
-            <div class="layer2" id="spacer1">
-                <div class="component">
-                    <input type="checkbox" id="use_legacy"></input>
-                    <label for="use_legacy">use_legacy</label>
-                </div>
-                <div class="component">
-                    <input type="checkbox" id="enablename"></input>
-                    <label for="enablename">product:</label>
-                    <select name="name" id="name"></select>
-                </div>
-                <div class="component">
+        </div>
+        <div class="layer1" id="spacer2">
+            <div class="heading">
+                <button type="button" class="expander" id="expand2">JSON Filter Configuration ▲</button>
+        </div>
+            <div id="expandSection2">
+                <div class="spacer"></div>
+                <form id="form" spellcheck="false">
+                    <div class="layer2">
+                        <div id="outputBox2"></div>
+                        <div class="controls">
+                            <button id="copyButton2" type="button">COPY</button>
+                            <button id="downloadButton2" type="button">DOWNLOAD</button>
+                            <div class="separator"></div>
+                            <input type="checkbox" id="enablePretty"></input>
+                            <label for="enablePretty" id="labelEnablePretty">Pretty</label>
+                        </div>
+                    </div>
+                    <div class="layer2" id="spacer1">
+                        <div class="component">
+                            <input type="checkbox" id="use_legacy"></input>
+                            <label for="use_legacy">use_legacy</label>
+                        </div>
+                        <div class="component">
+                            <input type="checkbox" id="enablename"></input>
+                            <label for="enablename">product:</label>
+                            <select name="name" id="name"></select>
+                        </div>
+                        <div class="component">
 
-                    <input type="checkbox" id="enableapp_id"></input>
-                    <label for="enableapp_id">app_id:</label>
-                    <select name="app_id" id="app_id"></select>
-                </div>
-                <div class="component">
-                    <input type="checkbox" id="enableversion"></input>
-                    <label for="enableversion">version:</label>
-                    <select name="version" id="version"></select>
-                </div>
-                <div class="component">
-                    <input type="checkbox" id="enablelanguages"></input>
-                    <label for="enablelanguages">languages:</label>
-                    <select name="languages" id="languages"></select>
-                </div>
-                <div class="component">
-                    <input type="checkbox" id="enableos_types"></input>
-                    <label for="enableos_types">os_types:</label>
-                    <select name="os_types" id="os_types"></select>
-                </div>
-                <div class="component">
-                    <input type="checkbox" id="enableplatforms"></input>
-                    <label for="enableplatforms">platforms:</label>
-                    <select name="platforms" id="platforms"></select>
-                </div>
-                <div class="component">
-                    <input type="checkbox" id="enablelegacy"></input>
-                    <label for="enablelegacy">legacy:</label>
-                    <select name="legacy" id="legacy"></select>
-                </div>
-                <div class="controls">
-                    <button id="selectAll" type="button" title="Select all">SELECT ALL</button>
-                    <button id="clearFilters" type="button" title="Select none">SELECT NONE</button>
-                    <div class="divider"></div>
-                    <button id="setDefaults" type="button" title="Set defaults">SET DEFAULTS</button>
-                    <button id="addProduct" type="button" title="Add product">ADD PRODUCT</button>
-                </div>
+                            <input type="checkbox" id="enableapp_id"></input>
+                            <label for="enableapp_id">app_id:</label>
+                            <select name="app_id" id="app_id"></select>
+                        </div>
+                        <div class="component">
+                            <input type="checkbox" id="enableversion"></input>
+                            <label for="enableversion">version:</label>
+                            <select name="version" id="version"></select>
+                        </div>
+                        <div class="component">
+                            <input type="checkbox" id="enablelanguages"></input>
+                            <label for="enablelanguages">languages:</label>
+                            <select name="languages" id="languages"></select>
+                        </div>
+                        <div class="component">
+                            <input type="checkbox" id="enableos_types"></input>
+                            <label for="enableos_types">os_types:</label>
+                            <select name="os_types" id="os_types"></select>
+                        </div>
+                        <div class="component">
+                            <input type="checkbox" id="enableplatforms"></input>
+                            <label for="enableplatforms">platforms:</label>
+                            <select name="platforms" id="platforms"></select>
+                        </div>
+                        <div class="component">
+                            <input type="checkbox" id="enablelegacy"></input>
+                            <label for="enablelegacy">legacy:</label>
+                            <select name="legacy" id="legacy"></select>
+                        </div>
+                        <div class="controls">
+                            <button id="buttonSelectAll2" type="button" title="Select all">SELECT ALL</button>
+                            <button id="buttonClearFilters2" type="button" title="Select none">SELECT NONE</button>
+                            <div class="separator"></div>
+                            <button id="buttonSetDefaults2" type="button" title="Set defaults">SET DEFAULTS</button>
+                            <button id="buttonAddProduct2" type="button" title="Add product">ADD PRODUCT</button>
+                        </div>
+                    </div>
+                    <div class="layer2">
+                        <table id="table">
+                            <tr>
+                                <th>app_id</th>
+                                <th>name</th>
+                                <th>version</th>
+                                <th>languages</th>
+                                <th>os_types</th>
+                                <th>platforms</th>
+                                <th>legacy</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>NA</td>
+                                <td>defaults</td>
+                                <td>NA</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>NA</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <div class="controls">
+                            <button id="buttonReset2" type="button" title="Reset JSON configuration">RESET</button>
+                        </div>
+                    </div>
             </div>
-            <div class="layer2">
-                <table id="table">
-                    <tr>
-                        <th>app_id</th>
-                        <th>name</th>
-                        <th>version</th>
-                        <th>languages</th>
-                        <th>os_types</th>
-                        <th>platforms</th>
-                        <th>legacy</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td>NA</td>
-                        <td>defaults</td>
-                        <td>NA</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>NA</td>
-                        <td></td>
-                    </tr>
-                </table>
-                <div class="controls">
-                    <button id="resetButton" type="button" title="Reset all">RESET</button>
-                </div>
-            </div>
-        </div>
-        </form>
+    </form>
     </div>
     </form>
     <div id="footer">
         <a href="https://github.com/esetuk/mirrortoolconfigurator" target="_blank">Github</a> |
         <a href="https://help.eset.com/protect_install/90/en-US/mirror_tool_windows.html" target="_blank">MirrorTool</a>
     </div>
+    <div id="hidden"></div>
     <script type="text/javascript" src="src/main.js"></script>
 </body>
-
 </html>
