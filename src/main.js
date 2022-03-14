@@ -60,7 +60,11 @@ let clipboard2 = new Clipboard(copyButton2, {
 function update() {
     updateBaseDirectory();
     //Master list of parameters - KEY: 0=name of parameter, 1=default value, 2=type of element, 3=section name, 4=optional
+<<<<<<< HEAD
     let pList = [
+=======
+    let parameterList = [
+>>>>>>> e3d05f25922bbe3474fc2dc2294345c2afbfda83
         ["mirrorType", "regular", "select", "mirror", false],
         ["intermediateUpdateDirectory", updateBaseDirectory() + "mirrorTemp", "text", "mirror", false],
         ["offlineLicenseFilename", updateBaseDirectory() + "offline.lf", "text", "mirror", false],
@@ -88,10 +92,17 @@ function update() {
     //Set default sections
     if (setDefaults) { enableMirror.checked = true; enableRepository.checked = false; enableGlobal.checked = false; enableOptional.checked = false; }
 
+<<<<<<< HEAD
     for (let i = 0; i < pList.length; i++) {
         
         //Parameter aliases
         let pName = pList[i][0], pDefault = pList[i][1], pType = pList[i][2], pSectionCheckbox = document.getElementById("enable" + pList[i][3].charAt(0).toUpperCase() + pList[i][3].slice(1)), pOptional = pList[i][4];
+=======
+    for (let i = 0; i < parameterList.length; i++) {
+        
+        //Parameter aliases
+        let pName = parameterList[i][0], pDefault = parameterList[i][1], pType = parameterList[i][2], pSection = parameterList[i][3], pOptional = parameterList[i][4];
+>>>>>>> e3d05f25922bbe3474fc2dc2294345c2afbfda83
         pElement = document.getElementById(pName);
         
         //Set defaults
@@ -104,9 +115,15 @@ function update() {
         //Iterate through all the parameters
         if (pElement != null) {
             //Check if section is enabled, if so allow the mandatory parameters to be written to the output
+<<<<<<< HEAD
             if (pSectionCheckbox.checked) {
                 //Check if either optional parameters are enabled or optional parameters are disabled and current parameter is mandatory
                 if (enableOptional.checked || !enableOptional.checked && pList[i][4] == false) {
+=======
+            if ((enableMirror.checked && pSection == "mirror") || (enableRepository.checked && pSection == "repository") || (enableGlobal.checked && pSection == "global")) {
+                //Check if either optional parameters are enabled or optional parameters are disabled and current parameter is mandatory
+                if (enableOptional.checked || !enableOptional.checked && parameterList[i][4] == false) {
+>>>>>>> e3d05f25922bbe3474fc2dc2294345c2afbfda83
                     //Add parameters, arguments and colour styles to the html
                     switch (pType) {
                         case ("text"):
@@ -127,7 +144,11 @@ function update() {
         }
 
         //If field is empty and mandatory then highlight the field red, modify the placeholder text, and declare the output as invalid
+<<<<<<< HEAD
         if (pElement.value == "" && !pOptional && pSectionCheckbox.checked) {
+=======
+        if (pElement.value == "" && !pOptional) {
+>>>>>>> e3d05f25922bbe3474fc2dc2294345c2afbfda83
             pElement.style.borderColor = "rgb(194, 71, 71)";
             pElement.placeholder = "This field cannot be blank";
             isOutputValid++
