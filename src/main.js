@@ -24,20 +24,20 @@ for (i = 0; i < temp.length; i++) {
 //Event listeners
 buttonClearFilters2.addEventListener("click", function () { clearFilters2(); });
 document.getElementById("buttonSelectAll2").addEventListener("click", function () { selectAll2(); });
-main.addEventListener("change", function () { update2(); });
+//main.addEventListener("change", function () { update2(); });
 document.getElementById("buttonSetDefaults2").addEventListener("click", function () { setDefaults2(); });
 buttonAddProduct2.addEventListener("click", function () { addProduct2(); });
 table.addEventListener("click", function (e) { removeRow2(e); });
-buttonReset2.addEventListener("click", function () { reset2(); });
+buttonReset2.addEventListener("click", function () { update2(); }); // UPDATE THIS LATER <-----------------------------
 downloadButton2.addEventListener("click", function () { download("filter.json", outputBox2.innerHTML); });
-for (let i = 0; i < nodes.length; i++) {
-    document.getElementById(nodes[i]).addEventListener("change", function () { document.getElementById("enable" + nodes[i]).checked = true; update2(); });
-    document.getElementById("enable" + nodes[i]).addEventListener("click", function () { update2(); });
-}
+// for (let i = 0; i < nodes.length; i++) {
+//     document.getElementById(nodes[i]).addEventListener("change", function () { document.getElementById("enable" + nodes[i]).checked = true; update2(); });
+//     document.getElementById("enable" + nodes[i]).addEventListener("click", function () { update2(); });
+// }
 expand1.addEventListener("click", function () { openSection(1, null, true); });
 expand2.addEventListener("click", function () { openSection(2, null, true); });
-main.addEventListener("input", function () { update(); });
-resetButton.addEventListener("click", function () { reset() });
+//main.addEventListener("input", function () { update(); });
+resetButton.addEventListener("click", function () { reset(); });
 enableWindows.addEventListener("click", function () { isWindows ? null : reset() });
 enableLinux.addEventListener("click", function () { isWindows ? reset() : null });
 downloadButton.addEventListener("click", function (event) { enableWindows.checked ? download('test.bat', hidden.textContent) : download('test.sh', hidden.textContent.split("sudo ").pop()); });
@@ -60,11 +60,7 @@ let clipboard2 = new Clipboard(copyButton2, {
 function update() {
     updateBaseDirectory();
     //Master list of parameters - KEY: 0=name of parameter, 1=default value, 2=type of element, 3=section name, 4=optional
-<<<<<<< HEAD
     let pList = [
-=======
-    let parameterList = [
->>>>>>> e3d05f25922bbe3474fc2dc2294345c2afbfda83
         ["mirrorType", "regular", "select", "mirror", false],
         ["intermediateUpdateDirectory", updateBaseDirectory() + "mirrorTemp", "text", "mirror", false],
         ["offlineLicenseFilename", updateBaseDirectory() + "offline.lf", "text", "mirror", false],
@@ -92,17 +88,10 @@ function update() {
     //Set default sections
     if (setDefaults) { enableMirror.checked = true; enableRepository.checked = false; enableGlobal.checked = false; enableOptional.checked = false; }
 
-<<<<<<< HEAD
     for (let i = 0; i < pList.length; i++) {
         
         //Parameter aliases
         let pName = pList[i][0], pDefault = pList[i][1], pType = pList[i][2], pSectionCheckbox = document.getElementById("enable" + pList[i][3].charAt(0).toUpperCase() + pList[i][3].slice(1)), pOptional = pList[i][4];
-=======
-    for (let i = 0; i < parameterList.length; i++) {
-        
-        //Parameter aliases
-        let pName = parameterList[i][0], pDefault = parameterList[i][1], pType = parameterList[i][2], pSection = parameterList[i][3], pOptional = parameterList[i][4];
->>>>>>> e3d05f25922bbe3474fc2dc2294345c2afbfda83
         pElement = document.getElementById(pName);
         
         //Set defaults
@@ -115,15 +104,9 @@ function update() {
         //Iterate through all the parameters
         if (pElement != null) {
             //Check if section is enabled, if so allow the mandatory parameters to be written to the output
-<<<<<<< HEAD
             if (pSectionCheckbox.checked) {
                 //Check if either optional parameters are enabled or optional parameters are disabled and current parameter is mandatory
                 if (enableOptional.checked || !enableOptional.checked && pList[i][4] == false) {
-=======
-            if ((enableMirror.checked && pSection == "mirror") || (enableRepository.checked && pSection == "repository") || (enableGlobal.checked && pSection == "global")) {
-                //Check if either optional parameters are enabled or optional parameters are disabled and current parameter is mandatory
-                if (enableOptional.checked || !enableOptional.checked && parameterList[i][4] == false) {
->>>>>>> e3d05f25922bbe3474fc2dc2294345c2afbfda83
                     //Add parameters, arguments and colour styles to the html
                     switch (pType) {
                         case ("text"):
@@ -144,11 +127,7 @@ function update() {
         }
 
         //If field is empty and mandatory then highlight the field red, modify the placeholder text, and declare the output as invalid
-<<<<<<< HEAD
         if (pElement.value == "" && !pOptional && pSectionCheckbox.checked) {
-=======
-        if (pElement.value == "" && !pOptional) {
->>>>>>> e3d05f25922bbe3474fc2dc2294345c2afbfda83
             pElement.style.borderColor = "rgb(194, 71, 71)";
             pElement.placeholder = "This field cannot be blank";
             isOutputValid++
@@ -241,12 +220,17 @@ function selectAll2() {
     }
     update2();
 }
-
+function getSelected(select){
+    let result = [];
+    for (i = 0; i < select.length; i++){
+        if (select.options[i].selected) result.push(select.options[i].value);
+    }
+    return result;
+}
 function addProduct2() {
     //Check if anything is selected, otherwise do nothing
     if (isAnythingSelected2()) {
         //Get the rows and columns count
-        let columnCount = nodes.length,
             rowCount = table.rows.length;
         let row = table.insertRow(rowCount);
         //Iterate through each node
@@ -255,7 +239,11 @@ function addProduct2() {
             if (i != nodes.length) {
                 //Check if filter checkbox is enabled
                 if (document.getElementById("enable" + nodes[i]).checked) {
-                    row.insertCell(i).innerHTML = document.getElementById(nodes[i]).options[document.getElementById(nodes[i]).selectedIndex].text; //Insert a cell containing the currently selected item in the select
+                    if (document.getElementById(nodes[i]).multiple){
+                        row.insertCell(i).innerHTML = getSelected(document.getElementById(nodes[i]));
+                    } else {
+                        row.insertCell(i).innerHTML = document.getElementById(nodes[i]).options[document.getElementById(nodes[i]).selectedIndex].text; //Insert a cell containing the currently selected item in the select
+                    }
                 } else {
                     //Otherwise if not checked just add a blank
                     row.insertCell(i).innerHTML = "";
