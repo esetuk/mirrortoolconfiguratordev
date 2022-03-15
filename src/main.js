@@ -415,20 +415,21 @@ function update2() {
     for (let i = 1; i < products.length; i++) {
         let include = true;
         //Iterate through the products child array
+        let count = 0;
         for (let j = 0; j < nodes.length; j++) {
             let selected = [];
             //Check if filter is enabled and if the currently selected item matches a line in the array
             if (!document.getElementById("enable" + nodes[j]).checked) continue;
             if (i == 1) selected = getSelected(nodes[j]); //Only get selected items once
             if (selectIsMultiple(nodes[j]) && selected.length > 0) {
-                        include = false;
-                        for (let k = 0; k < selected.length; k++) {
+                for (let k = 0; k < selected.length; k++) {
                             //-----------------HERE--------------------
-                                if (selected[k] == products[i][j]) include = true;
+                                if (selected[k] == products[i][j]) count++;
                             }
                         } else {
                                 if (document.getElementById(nodes[j]).value != products[i][j]) include = false;
                 }
+            if (count == 0) include = false;
             }
             //If there are any matching items, add the whole line to the parent temp array
             if (include) temp.push(products[i]);
