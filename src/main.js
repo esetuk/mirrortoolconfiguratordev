@@ -1,7 +1,7 @@
 let setDefaults = true, pElement, isWindows = true;
 enableWindows.checked = true;
 openSection(1, false, false);
-openSection(2, false, false);
+openSection(2, true, false);
 
 //Read in products.csv (obtained by running MirrorTool with --dryRun parameter) and split it by each new line/carraige return
 temp = readTextFile("https://raw.githubusercontent.com/esetuk/mirrortoolconfigurator/master/res/products.csv").split(/[\r\n]+/),
@@ -10,10 +10,10 @@ temp = readTextFile("https://raw.githubusercontent.com/esetuk/mirrortoolconfigur
     nodes = ["app_id", "name", "version", "languages", "os_types", "platforms", "legacy"];
 
 //Iterate through each line of products.csv
-for (i = 0; i < temp.length; i++) {
+for (let i = 0; i < temp.length; i++) {
     //Split the lines by comma seperator and remove the path
     temp[i] = temp[i].split(",").slice(0, -1)
-    for (j = 0; j < temp[i].length; j++) {
+    for (let j = 0; j < temp[i].length; j++) {
         //Trim whitespace and add the element into the array
         temp[i][j] = temp[i][j].trim();
     }
@@ -25,18 +25,18 @@ for (i = 0; i < temp.length; i++) {
 buttonClearFilters2.addEventListener("click", function () { clearFilters2(); });
 document.getElementById("buttonSelectAll2").addEventListener("click", function () { selectAll2(); });
 //main.addEventListener("change", function () { update2(); });
+main.addEventListener("input", function () { update(); });
 document.getElementById("buttonSetDefaults2").addEventListener("click", function () { setDefaults2(); });
 buttonAddProduct2.addEventListener("click", function () { addProduct2(); });
 table.addEventListener("click", function (e) { removeRow2(e); });
-buttonReset2.addEventListener("click", function () { update2(); }); // UPDATE THIS LATER <-----------------------------
+buttonReset2.addEventListener("click", function () { }); // TODO
 downloadButton2.addEventListener("click", function () { download("filter.json", outputBox2.innerHTML); });
-// for (let i = 0; i < nodes.length; i++) {
-//     document.getElementById(nodes[i]).addEventListener("change", function () { document.getElementById("enable" + nodes[i]).checked = true; update2(); });
-//     document.getElementById("enable" + nodes[i]).addEventListener("click", function () { update2(); });
-// }
+for (let i = 0; i < nodes.length; i++) {
+    //document.getElementById(nodes[i]).addEventListener("change", function () { document.getElementById("enable" + nodes[i]).checked = true; update2(); });
+    document.getElementById("enable" + nodes[i]).addEventListener("click", function () { update2(); });
+}
 expand1.addEventListener("click", function () { openSection(1, null, true); });
 expand2.addEventListener("click", function () { openSection(2, null, true); });
-//main.addEventListener("input", function () { update(); });
 resetButton.addEventListener("click", function () { reset(); });
 enableWindows.addEventListener("click", function () { isWindows ? null : reset() });
 enableLinux.addEventListener("click", function () { isWindows ? reset() : null });
@@ -89,18 +89,18 @@ function update() {
     if (setDefaults) { enableMirror.checked = true; enableRepository.checked = false; enableGlobal.checked = false; enableOptional.checked = false; }
 
     for (let i = 0; i < pList.length; i++) {
-        
+
         //Parameter aliases
         let pName = pList[i][0], pDefault = pList[i][1], pType = pList[i][2], pSectionCheckbox = document.getElementById("enable" + pList[i][3].charAt(0).toUpperCase() + pList[i][3].slice(1)), pOptional = pList[i][4];
         pElement = document.getElementById(pName);
-        
+
         //Set defaults
         if (setDefaults) { pElement.value = pDefault; pElement.checked = pDefault; }
         let o = document.getElementsByClassName("optional");
-        
+
         //Iterate through optional parameters, hide them if enableoptional is not checked
         for (let i = 0; i < o.length; i++) { enableOptional.checked ? o[i].style.display = "block" : o[i].style.display = "none"; }
-        
+
         //Iterate through all the parameters
         if (pElement != null) {
             //Check if section is enabled, if so allow the mandatory parameters to be written to the output
@@ -220,18 +220,14 @@ function selectAll2() {
     }
     update2();
 }
-function getSelected(select){
-    let result = [];
-    for (i = 0; i < select.length; i++){
-        if (select.options[i].selected) result.push(select.options[i].value);
-    }
-    return result;
+function selectIsMultiple(select) {
+    return document.getElementById(select).multiple;
 }
 function addProduct2() {
     //Check if anything is selected, otherwise do nothing
     if (isAnythingSelected2()) {
         //Get the rows and columns count
-            rowCount = table.rows.length;
+        rowCount = table.rows.length;
         let row = table.insertRow(rowCount);
         //Iterate through each node
         for (let i = 0; i < nodes.length + 1; i++) {
@@ -239,7 +235,7 @@ function addProduct2() {
             if (i != nodes.length) {
                 //Check if filter checkbox is enabled
                 if (document.getElementById("enable" + nodes[i]).checked) {
-                    if (document.getElementById(nodes[i]).multiple){
+                    if (selectIsMultiple(nodes[i])) {
                         row.insertCell(i).innerHTML = getSelected(document.getElementById(nodes[i]));
                     } else {
                         row.insertCell(i).innerHTML = document.getElementById(nodes[i]).options[document.getElementById(nodes[i]).selectedIndex].text; //Insert a cell containing the currently selected item in the select
@@ -375,7 +371,7 @@ function GetJSON() {
     enablePretty.checked ? json_space = "\t" : json_space = "";
     let json_use_legacy = use_legacy.checked, json_nodes = {}, products = [], defaults = [];
     //Iterate through defaults row and add this to json_nodes array
-    for (i = 3; i < 6; i++) {
+    for (let i = 3; i < 6; i++) {
         if (table.rows[1].cells[i].innerHTML != "") json_nodes[nodes[i]] = table.rows[1].cells[i].innerHTML;
     }
     //Use undefined so that the item is ignored when using JSON.stringify
@@ -400,62 +396,81 @@ function GetJSON() {
     return JSONString;
 }
 
+function getSelected(select) {
+    let result = [];
+    if (document.getElementById(select) != null) {
+        for (let i = 0; i < document.getElementById(select).length; i++) {
+            if (document.getElementById(select).options[i].selected) result.push(document.getElementById(select).options[i].value);
+        }
+    }
+    return result;
+}
+
 //Main update function, called by various event listeners to trigger update of output box and filters
 function update2() {
     IsAnyProductsSelected2();
     IsAnyDefaultsSelected2();
     let temp = [];
     //Iterate through products array
-    for (i = 1; i < products.length; i++) {
+    for (let i = 1; i < products.length; i++) {
         let include = true;
         //Iterate through the products child array
-        for (j = 0; j < products[i].length - 1; j++) {
+        for (let j = 0; j < nodes.length; j++) {
+            let selected = [];
             //Check if filter is enabled and if the currently selected item matches a line in the array
-            if ((document.getElementById("enable" + nodes[j]).checked && document.getElementById(nodes[j]).value != products[i][j])) {
-                include = false;
+            if (!document.getElementById("enable" + nodes[j]).checked) continue;
+            if (i == 1) selected = getSelected(nodes[j]); //Only get selected items once
+            if (selectIsMultiple(nodes[j]) && selected.length > 0) {
+                        include = false;
+                        for (let k = 0; k < selected.length; k++) {
+                            //-----------------HERE--------------------
+                                if (selected[k] == products[i][j]) include = true;
+                            }
+                        } else {
+                                if (document.getElementById(nodes[j]).value != products[i][j]) include = false;
+                }
+            }
+            //If there are any matching items, add the whole line to the parent temp array
+            if (include) temp.push(products[i]);
+        }
+        //Clear all select options prior to re-populating and disable any empty ones
+        for (let i = 0; i < nodes.length; i++) {
+            let node = document.getElementById(nodes[i]);
+            if (node != null) node.innerHTML = "";
+        }
+        //Second array in order to prevent duplication (will only add if an item with the same name is not found), and to filter out empty strings, and containing semi-colon
+        let temp2 = [];
+        //Iterate through the temp array
+        for (let i = 0; i < temp.length; i++) {
+            //Iterate through the temp child array
+            for (let j = 0; j < temp[i].length - 1; j++) {
+                //Filter existing, empty, contains semi-colon
+                if (temp2.indexOf(temp[i][j]) == -1 && temp[i][j] !== "" && !temp[i][j].includes(";")) {
+                    temp2.push(temp[i][j]);
+                    //Create the option
+                    let option = document.createElement("option");
+                    //Set the options value and text
+                    option.value = option.text = temp[i][j];
+                    //Append the option to the select
+                    document.getElementById(nodes[j]).appendChild(option);
+                }
             }
         }
-        //If there are any matching items, add the whole line to the parent temp array
-        if (include) temp.push(products[i]);
-    }
-    //Clear all select options prior to re-populating and disable any empty ones
-    for (i = 0; i < nodes.length; i++) {
-        let node = document.getElementById(nodes[i]);
-        if (node != null) node.innerHTML = "";
-    }
-    //Second array in order to prevent duplication (will only add if an item with the same name is not found), and to filter out empty strings, and containing semi-colon
-    let temp2 = [];
-    //Iterate through the temp array
-    for (i = 0; i < temp.length; i++) {
-        //Iterate through the temp child array
-        for (j = 0; j < temp[i].length - 1; j++) {
-            //Filter existing, empty, contains semi-colon
-            if (temp2.indexOf(temp[i][j]) == -1 && temp[i][j] !== "" && !temp[i][j].includes(";")) {
-                temp2.push(temp[i][j]);
-                //Create the option
-                let option = document.createElement("option");
-                //Set the options value and text
-                option.value = option.text = temp[i][j];
-                //Append the option to the select
-                document.getElementById(nodes[j]).appendChild(option);
+        //Iterate through each node
+        for (let i = 0; i < nodes.length; i++) {
+            let node = document.getElementById(nodes[i]);
+            let isNode = document.getElementById("enable" + nodes[i]);
+            //If no sub options
+            if (node.length == 0) {
+                //Disable the select and its corresponding checkbox
+                node.disabled = true;
+                isNode.disabled = true;
+            } else {
+                //Enable the select and its corresponding checkbox
+                node.disabled = false;
+                isNode.disabled = false;
             }
         }
+        //Set the output box to the output of the JSON parser
+        document.getElementById("outputBox2").innerHTML = GetJSON();
     }
-    //Iterate through each node
-    for (i = 0; i < nodes.length; i++) {
-        let node = document.getElementById(nodes[i]);
-        let isNode = document.getElementById("enable" + nodes[i]);
-        //If no sub options
-        if (node.length == 0) {
-            //Disable the select and its corresponding checkbox
-            node.disabled = true;
-            isNode.disabled = true;
-        } else {
-            //Enable the select and its corresponding checkbox
-            node.disabled = false;
-            isNode.disabled = false;
-        }
-    }
-    //Set the output box to the output of the JSON parser
-    document.getElementById("outputBox2").innerHTML = GetJSON();
-}
