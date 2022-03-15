@@ -424,6 +424,7 @@ function update2() {
             if (selectIsMultiple(nodes[j]) && selected.length > 0) {
                 for (let k = 0; k < selected.length; k++) {
                             //-----------------HERE--------------------
+                            //only showing one item in the select
                                 if (selected[k] == products[i][j]) count++;
                             }
                         } else {
