@@ -410,69 +410,52 @@ function getSelected(select) {
 function update2() {
     IsAnyProductsSelected2();
     IsAnyDefaultsSelected2();
-    let temp = [];
-    //Iterate through products array
-    for (let i = 1; i < products.length; i++) {
-        let include = true;
-        //Iterate through the products child array
-        let count = 0;
-        for (let j = 0; j < nodes.length; j++) {
-            let selected = [];
-            //Check if filter is enabled and if the currently selected item matches a line in the array
-            if (!document.getElementById("enable" + nodes[j]).checked) continue;
-            if (i == 1) selected = getSelected(nodes[j]); //Only get selected items once
-            if (selectIsMultiple(nodes[j]) && selected.length > 0) {
-                for (let k = 0; k < selected.length; k++) {
-                            //-----------------HERE--------------------
-                            //only showing one item in the select
-                                if (selected[k] == products[i][j]) count++;
-                            }
-                        } else {
-                                if (document.getElementById(nodes[j]).value != products[i][j]) include = false;
-                }
-            if (count == 0) include = false;
-            }
-            //If there are any matching items, add the whole line to the parent temp array
-            if (include) temp.push(products[i]);
-        }
-        //Clear all select options prior to re-populating and disable any empty ones
-        for (let i = 0; i < nodes.length; i++) {
-            let node = document.getElementById(nodes[i]);
-            if (node != null) node.innerHTML = "";
-        }
-        //Second array in order to prevent duplication (will only add if an item with the same name is not found), and to filter out empty strings, and containing semi-colon
-        let temp2 = [];
-        //Iterate through the temp array
-        for (let i = 0; i < temp.length; i++) {
-            //Iterate through the temp child array
-            for (let j = 0; j < temp[i].length - 1; j++) {
-                //Filter existing, empty, contains semi-colon
-                if (temp2.indexOf(temp[i][j]) == -1 && temp[i][j] !== "" && !temp[i][j].includes(";")) {
-                    temp2.push(temp[i][j]);
-                    //Create the option
-                    let option = document.createElement("option");
-                    //Set the options value and text
-                    option.value = option.text = temp[i][j];
-                    //Append the option to the select
-                    document.getElementById(nodes[j]).appendChild(option);
-                }
-            }
-        }
-        //Iterate through each node
-        for (let i = 0; i < nodes.length; i++) {
-            let node = document.getElementById(nodes[i]);
-            let isNode = document.getElementById("enable" + nodes[i]);
-            //If no sub options
-            if (node.length == 0) {
-                //Disable the select and its corresponding checkbox
-                node.disabled = true;
-                isNode.disabled = true;
-            } else {
-                //Enable the select and its corresponding checkbox
-                node.disabled = false;
-                isNode.disabled = false;
-            }
-        }
-        //Set the output box to the output of the JSON parser
-        document.getElementById("outputBox2").innerHTML = GetJSON();
+    
+    //----here----
+
+    //Clear all select options prior to re-populating
+    for (let i = 0; i < nodes.length; i++) {
+        let node = document.getElementById(nodes[i]);
+        if (node != null) node.innerHTML = "";
     }
+    //Second array in order to prevent duplication (will only add if an item with the same name is not found), and to filter out empty strings, and containing semi-colon
+    let temp2 = [];
+    //Iterate through the temp array
+    for (let i = 0; i < temp.length; i++) {
+        //Iterate through the temp child array
+        for (let j = 0; j < temp[i].length - 1; j++) {
+            //Filter existing, empty, contains semi-colon
+            if (temp2.indexOf(temp[i][j]) == -1 && temp[i][j] !== "" && !temp[i][j].includes(";")) {
+                temp2.push(temp[i][j]);
+                //Create the option
+                let option = document.createElement("option");
+                //Set the options value and text
+                option.value = option.text = temp[i][j];
+                //Append the option to the select
+                document.getElementById(nodes[j]).appendChild(option);
+            }
+        }
+    }
+    //Iterate through each node
+    for (let i = 0; i < nodes.length; i++) {
+        let node = document.getElementById(nodes[i]);
+        let isNode = document.getElementById("enable" + nodes[i]);
+        //If no sub options
+        if (node.length == 0) {
+            //Disable the select and its corresponding checkbox
+            node.disabled = true;
+            isNode.disabled = true;
+        } else {
+            //Enable the select and its corresponding checkbox
+            node.disabled = false;
+            isNode.disabled = false;
+        }
+        if (selectIsMultiple(nodes[i]) && isNode.checked) {
+            for (let j = 0; j < node.length; j++) {
+                node.options[j].selected = true;
+            }
+        }
+    }
+    //Set the output box to the output of the JSON parser
+    document.getElementById("outputBox2").innerHTML = GetJSON();
+}

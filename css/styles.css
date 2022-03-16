@@ -29,12 +29,15 @@ button:active {
 }
 select {
     background-color: rgb(24, 24, 24);
-    overflow: hidden;
     width: auto;
     padding: 5px;
     vertical-align: middle;
     margin: 5px;
     height: auto;
+}
+select option:checked {
+    color: rgb(255, 255, 255);
+    background-color: rgb(59, 59, 59);
 }
 input {
     background-color: rgb(24, 24, 24);
@@ -147,8 +150,7 @@ a:hover {
     border: 1px solid rgb(65, 65, 65);
     padding: 10px;
     background-color: rgb(35, 35, 35);
-    height: 40px;
-    line-height: 40px;
+    height: auto;
     vertical-align: middle;
     text-align: left;
 }
