@@ -1,4 +1,4 @@
-let setDefaults = true, pElement, isWindows = true;
+let setDefaults = true, pElement, isWindows = true, options = [];
 enableWindows.checked = true;
 openSection(1, false, false);
 openSection(2, true, false);
@@ -220,7 +220,7 @@ function selectAll2() {
     }
     update2();
 }
-function selectIsMultiple(select) {
+function selectIsMultiple2(select) {
     return document.getElementById(select).multiple;
 }
 function addProduct2() {
@@ -396,7 +396,7 @@ function GetJSON() {
     return JSONString;
 }
 
-function getSelected(select) {
+function getSelected2(select) {
     let result = [];
     if (document.getElementById(select) != null) {
         for (let i = 0; i < document.getElementById(select).length; i++) {
@@ -405,57 +405,46 @@ function getSelected(select) {
     }
     return result;
 }
+function getAllOptions2(index) {
+    let result = [];
+    for (let i = 1; i < products.length; i++) {
+            if (result.indexOf(products[i][index]) == -1 && products[i][index] != "" && !products[i][index].includes(";")) result.push(products[i][index]);
+        }
+    return result.sort();
+}
+
+function fillSelect2(index){
+    clearSelect2(index);
+    for (let i = 0; i < options[index].length; i++){
+        let opt = document.createElement("option");
+        opt.value = opt.text = options[index][i];
+        if (opt.text == 0) opt.text = "yes";
+        if (opt.text == 1) opt.text = "no";
+        document.getElementById(nodes[index]).appendChild(opt);
+    }
+}
+
+function clearSelect2(index){
+    document.getElementById(nodes[index]).innerHTML = "";
+}
 
 //Main update function, called by various event listeners to trigger update of output box and filters
 function update2() {
     IsAnyProductsSelected2();
     IsAnyDefaultsSelected2();
-    
-    //----here----
-
-    //Clear all select options prior to re-populating
     for (let i = 0; i < nodes.length; i++) {
-        let node = document.getElementById(nodes[i]);
-        if (node != null) node.innerHTML = "";
-    }
-    //Second array in order to prevent duplication (will only add if an item with the same name is not found), and to filter out empty strings, and containing semi-colon
-    let temp2 = [];
-    //Iterate through the temp array
-    for (let i = 0; i < temp.length; i++) {
-        //Iterate through the temp child array
-        for (let j = 0; j < temp[i].length - 1; j++) {
-            //Filter existing, empty, contains semi-colon
-            if (temp2.indexOf(temp[i][j]) == -1 && temp[i][j] !== "" && !temp[i][j].includes(";")) {
-                temp2.push(temp[i][j]);
-                //Create the option
-                let option = document.createElement("option");
-                //Set the options value and text
-                option.value = option.text = temp[i][j];
-                //Append the option to the select
-                document.getElementById(nodes[j]).appendChild(option);
+        if (document.getElementById("enable" + nodes[i]).checked) {
+            if (selectIsMultiple2(nodes[i]) && document.getElementById(nodes[i]).length > 0) {
+                options.push(getSelected2(nodes[i]));
+            } else {
+                options.push(document.getElementById(nodes[i]).text);
             }
-        }
-    }
-    //Iterate through each node
-    for (let i = 0; i < nodes.length; i++) {
-        let node = document.getElementById(nodes[i]);
-        let isNode = document.getElementById("enable" + nodes[i]);
-        //If no sub options
-        if (node.length == 0) {
-            //Disable the select and its corresponding checkbox
-            node.disabled = true;
-            isNode.disabled = true;
         } else {
-            //Enable the select and its corresponding checkbox
-            node.disabled = false;
-            isNode.disabled = false;
-        }
-        if (selectIsMultiple(nodes[i]) && isNode.checked) {
-            for (let j = 0; j < node.length; j++) {
-                node.options[j].selected = true;
-            }
+            options.push(getAllOptions2(i));
+            fillSelect2(i);
         }
     }
+
     //Set the output box to the output of the JSON parser
     document.getElementById("outputBox2").innerHTML = GetJSON();
 }
