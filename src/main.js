@@ -432,6 +432,7 @@ function clearSelect2(index){
 function update2() {
     IsAnyProductsSelected2();
     IsAnyDefaultsSelected2();
+    options = [];
     for (let i = 0; i < nodes.length; i++) {
         if (document.getElementById("enable" + nodes[i]).checked) {
             if (selectIsMultiple2(nodes[i]) && document.getElementById(nodes[i]).length > 0) {
@@ -441,8 +442,8 @@ function update2() {
             }
         } else {
             options.push(getAllOptions2(i));
-            fillSelect2(i);
         }
+        fillSelect2(i);
     }
 
     //Set the output box to the output of the JSON parser
