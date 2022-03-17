@@ -33,7 +33,7 @@ buttonReset2.addEventListener("click", function () { }); // TODO
 downloadButton2.addEventListener("click", function () { download("filter.json", outputBox2.innerHTML); });
 for (let i = 0; i < nodes.length; i++) {
     //document.getElementById(nodes[i]).addEventListener("change", function () { document.getElementById("enable" + nodes[i]).checked = true; update2(); });
-    document.getElementById("enable" + nodes[i]).addEventListener("click", function () { update2(); });
+    document.getElementById("enable" + nodes[i]).addEventListener("click", function () { selectOptions2(i); update2(); });
 }
 expand1.addEventListener("click", function () { openSection(1, null, true); });
 expand2.addEventListener("click", function () { openSection(2, null, true); });
@@ -220,8 +220,8 @@ function selectAll2() {
     }
     update2();
 }
-function selectIsMultiple2(select) {
-    return document.getElementById(select).multiple;
+function selectIsMultiple2(name) {
+    return document.getElementById(name).multiple;
 }
 function addProduct2() {
     //Check if anything is selected, otherwise do nothing
@@ -408,24 +408,37 @@ function getSelected2(select) {
 function getAllOptions2(index) {
     let result = [];
     for (let i = 1; i < products.length; i++) {
-            if (result.indexOf(products[i][index]) == -1 && products[i][index] != "" && !products[i][index].includes(";")) result.push(products[i][index]);
-        }
+        if (result.indexOf(products[i][index]) == -1 && products[i][index] != "" && !products[i][index].includes(";")) result.push(products[i][index]);
+    }
     return result.sort();
 }
 
-function fillSelect2(index){
-    clearSelect2(index);
-    for (let i = 0; i < options[index].length; i++){
+function fillSelect2(index) {
+    document.getElementById(nodes[index]).innerHTML = "";
+    for (let i = 0; i < options[index].length; i++) {
         let opt = document.createElement("option");
         opt.value = opt.text = options[index][i];
-        if (opt.text == 0) opt.text = "yes";
-        if (opt.text == 1) opt.text = "no";
+        if (opt.text == "0") opt.text = "yes";
+        if (opt.text == "1") opt.text = "no";
         document.getElementById(nodes[index]).appendChild(opt);
     }
 }
 
-function clearSelect2(index){
-    document.getElementById(nodes[index]).innerHTML = "";
+function selectOptions2(index) {
+    if (selectIsMultiple2(nodes[index]) && getSelected2(nodes[index]).length == 0){
+        for (let i = 0; i < document.getElementById(nodes[index]).length; i++) {
+            document.getElementById(nodes[index]).options[i].selected = true;
+        }
+    }
+}
+
+function updateSelect2(index) {
+    for (let i = 0; i < document.getElementById(nodes[index]).length; i++) {
+        if (!document.getElementById(nodes[index]).options[i].selected) {
+            document.getElementById(nodes[index]).removeChild(document.getElementById(nodes[index]).options[i]);
+            i--;
+        }
+    }
 }
 
 //Main update function, called by various event listeners to trigger update of output box and filters
@@ -433,17 +446,20 @@ function update2() {
     IsAnyProductsSelected2();
     IsAnyDefaultsSelected2();
     options = [];
+
     for (let i = 0; i < nodes.length; i++) {
         if (document.getElementById("enable" + nodes[i]).checked) {
             if (selectIsMultiple2(nodes[i]) && document.getElementById(nodes[i]).length > 0) {
                 options.push(getSelected2(nodes[i]));
+                updateSelect2(i);
             } else {
-                options.push(document.getElementById(nodes[i]).text);
+                options.push([document.getElementById(nodes[i]).value]);
+                updateSelect2(i);
             }
         } else {
             options.push(getAllOptions2(i));
+            fillSelect2(i);
         }
-        fillSelect2(i);
     }
 
     //Set the output box to the output of the JSON parser
