@@ -1,4 +1,4 @@
-let setDefaults = true, pElement, isWindows = true, optionsFiltered, keyDown = false;
+let setDefaults = true, isSetAppDefaults2 = true, pElement, isWindows = true, optionsFiltered, keyDown = false;
 enableWindows.checked = true;
 openSection(1, false, false);
 openSection(2, true, false);
@@ -24,29 +24,32 @@ products.shift();
 
 //Event listeners
 buttonClearFilters2.addEventListener("click", function () { clearFilters2(); });
-//main.addEventListener("change", function () { update2(); });
+enablePretty.addEventListener("click", function () { update2(); });
 main.addEventListener("input", function () { update(); });
 document.getElementById("buttonSetDefaults2").addEventListener("click", function () { setDefaults2(); });
 buttonAddProduct2.addEventListener("click", function () { addProduct2(); });
 table.addEventListener("click", function (e) { removeRow2(e); });
 buttonReset2.addEventListener("click", function () { }); // TODO
 downloadButton2.addEventListener("click", function () { download("filter.json", outputBox2.innerHTML); });
-document.addEventListener("keydown", function(e) {
-    if (!e) e = windows.event;
-    if (e.shiftKey || e.ctrlKey) keyDown = true;
-});
-document.addEventListener("keyup", function(e) {
-    if (!e) e = windows.event;
-    if (e.shiftKey || e.ctrlKey) keyDown = false;
-    update2();
-});
 for (let i = 0; i < nodes.length; i++) {
-    document.getElementById(nodes[i]).addEventListener("change", function () { 
-            document.getElementById("enable" + nodes[i]).checked = true; 
-            if (!keyDown) update2();
+    if (i < 3 || i > 5) {
+        document.getElementById(nodes[i]).addEventListener("change", function (e) {
+            document.getElementById("enable" + nodes[i]).checked = true;
+            update2();
+        });
+    } else {
+        document.getElementById(nodes[i]).addEventListener("focusout", function (e) {
+            if (anyOptionsSelected2(i)){
+                document.getElementById("enable" + nodes[i]).checked = true;
+                update2();
+            }
+        });
+    }
+    document.getElementById("enable" + nodes[i]).addEventListener("click", function () {
+        update2();
     });
-    document.getElementById("enable" + nodes[i]).addEventListener("click", function () { selectOptions2(i); update2(); });
 }
+use_legacy.addEventListener("click", function () { update2(); });
 expand1.addEventListener("click", function () { openSection(1, null, true); });
 expand2.addEventListener("click", function () { openSection(2, null, true); });
 resetButton.addEventListener("click", function () { reset(); });
@@ -235,36 +238,6 @@ function selectAll2() {
 function selectIsMultiple2(name) {
     return document.getElementById(name).multiple;
 }
-function addProduct2() {
-    //Check if anything is selected, otherwise do nothing
-    if (isAnythingSelected2()) {
-        //Get the rows and columns count
-        rowCount = table.rows.length;
-        let row = table.insertRow(rowCount);
-        //Iterate through each node
-        for (let i = 0; i < nodes.length + 1; i++) {
-            //Check if we are on the last filter
-            if (i != nodes.length) {
-                //Check if filter checkbox is enabled
-                if (document.getElementById("enable" + nodes[i]).checked) {
-                    if (selectIsMultiple2(nodes[i])) {
-                        row.insertCell(i).innerHTML = getSelected2(document.getElementById(nodes[i]));
-                    } else {
-                        row.insertCell(i).innerHTML = document.getElementById(nodes[i]).options[document.getElementById(nodes[i]).selectedIndex].text; //Insert a cell containing the currently selected item in the select
-                    }
-                } else {
-                    //Otherwise if not checked just add a blank
-                    row.insertCell(i).innerHTML = "";
-                }
-            } else {
-                //Add a text remove button and set it's ID
-                row.insertCell(i).innerHTML = `<p class="removeIcon">X</p>`;
-                table.rows[rowCount].cells[i].id = "remove";
-            }
-        }
-        update2();
-    }
-}
 
 function removeRow2(e) {
     //Target the closest cell to the click
@@ -284,61 +257,63 @@ function removeRow2(e) {
     }
 }
 
+//Defaults
+function setAppDefaults2() {
+    isSetAppDefaults2 = false;
+}
+
+function addProduct2() {
+    //Check if anything is selected, otherwise do nothing
+    if (isAnythingSelected2()) {
+        //Get the rows and columns count
+        rowCount = table.rows.length;
+        let row = table.insertRow(rowCount);
+        //Iterate through each node
+        for (let i = 0; i <= nodes.length; i++) {
+            //Check if we are on the last filter
+            if (i != nodes.length) {
+                //Check if filter checkbox is enabled
+                if (document.getElementById("enable" + nodes[i]).checked) {
+                    if (selectIsMultiple2(nodes[i])) {
+                        row.insertCell(i).innerHTML = getSelected2(nodes[i]);
+                    } else {
+                        row.insertCell(i).innerHTML = document.getElementById(nodes[i]).options[document.getElementById(nodes[i]).selectedIndex].text; //Insert a cell containing the currently selected item in the select
+                    }
+                } else {
+                    //Otherwise if not checked just add a blank
+                    row.insertCell(i).innerHTML = "";
+                }
+            } else {
+                //Add a text remove button and set it's ID
+                row.insertCell(i).innerHTML = `<p class="removeIcon">X</p>`;
+                table.rows[rowCount].cells[i].id = "remove";
+            }
+        }
+        clearFilters2();
+        update2();
+    }
+}
 //Set defaults
 function setDefaults2() {
     if (IsAnyDefaultsSelected2()) {
-        //Set the default nodes
-        let defaultNodes = ["languages", "os_types", "platforms"];
         //Iterate through each default node
-        for (let i = 0; i < defaultNodes.length; i++) {
-            //To get the correct column reference
-            let offset = 3;
+        for (let i = 3; i < nodes.length - 1; i++) {
             //Check if filter is enabled, if so add the selected item into the cell
-            if (document.getElementById("enable" + defaultNodes[i]).checked) {
-                table.rows[1].cells[i + offset].innerHTML = document.getElementById(defaultNodes[i]).options[document.getElementById(defaultNodes[i]).selectedIndex].text;
+            if (document.getElementById("enable" + nodes[i]).checked) {
+                table.rows[1].cells[i].innerHTML = getSelected2(nodes[i]);
             } else {
                 //Otherwise add a blank
-                table.rows[1].cells[i + offset].innerHTML = "";
+                table.rows[1].cells[i].innerHTML = "";
             }
         }
         //Add a text remove icon and ID
         table.rows[1].cells[7].innerHTML = `<p class="removeIcon">X</p>`;
         table.rows[1].cells[7].id = "clear";
+        clearFilters2();
         update2();
     }
 }
 
-//Check if there are any filters selected
-function isAnythingSelected2() {
-    let selected = false;
-    //Iterate through each node
-    for (let i = 0; i < nodes.length; i++) {
-        if (document.getElementById("enable" + nodes[i]).checked == true) selected = true;
-    }
-    return selected;
-}
-
-//Check if any default filters are selected
-function IsAnyDefaultsSelected2() {
-    let selected = false;
-    //Iterate through each node starting from an offset of 3 and -1 to only collect defaults
-    for (let i = 3; i < nodes.length - 1; i++) {
-        if (document.getElementById("enable" + nodes[i]).checked == true) selected = true;
-    }
-    selected ? document.getElementById("buttonSetDefaults2").disabled = false : document.getElementById("buttonSetDefaults2").disabled = true;
-    return selected;
-}
-
-//Check if product or app_id is selected
-function IsAnyProductsSelected2() {
-    let selected = false;
-    //Iterate through each node starting from an offset of 3 and -1 to only collect defaults
-    for (let i = 0; i < 2; i++) {
-        if (document.getElementById("enable" + nodes[i]).checked == true) selected = true;
-    }
-    selected ? buttonAddProduct2.disabled = false : buttonAddProduct2.disabled = true;
-    return selected;
-}
 
 //JSON reset prompt
 //Not implemented yet
@@ -380,15 +355,16 @@ function readTextFile(file) {
 //JSON parser
 function GetJSON() {
     //Set the space value \t=tab ""=all on the same line
-    enablePretty.checked ? json_space = "\t" : json_space = "";
+    enablePretty.checked ? json_space = "\t" : json_space = 0;
     let json_use_legacy = use_legacy.checked, json_nodes = {}, products = [], defaults = [];
     //Iterate through defaults row and add this to json_nodes array
-    for (let i = 3; i < 6; i++) {
-        if (table.rows[1].cells[i].innerHTML != "") json_nodes[nodes[i]] = table.rows[1].cells[i].innerHTML;
+    for (let i = 3; i < nodes.length - 1; i++) {
+        //Set each key to its value from the table, or set as undefined
+        if (table.rows[1].cells[i].innerHTML != "")
+            table.rows[1].cells[i].innerHTML.includes(",") ? json_nodes[nodes[i]] = table.rows[1].cells[i].innerHTML.split(",") : json_nodes[nodes[i]] = table.rows[1].cells[i].innerHTML;
     }
-    //Use undefined so that the item is ignored when using JSON.stringify
-    //Check if json_nodes contains any key pairs, otherwise set defaults as undefined
     Object.keys(json_nodes).length == 0 ? defaults = undefined : defaults = json_nodes;
+    //Use undefined so that the item is ignored when using JSON.stringify
     //Iterate through each table row, starting from index 2 - under defaults
     for (let i = 2; i < table.rows.length; i++) {
         //Empty the json_nodes parent array
@@ -396,7 +372,8 @@ function GetJSON() {
         //Iterate through each node
         for (let j = 0; j < nodes.length - 1; j++) {
             //Set each key to its value from the table, or set as undefined
-            json_nodes[nodes[j]] = table.rows[i].cells[j].innerHTML || undefined;
+            if (table.rows[i].cells[j].innerHTML != "")
+                table.rows[i].cells[j].innerHTML.includes(",") ? json_nodes[nodes[j]] = table.rows[i].cells[j].innerHTML.split(",") : json_nodes[nodes[j]] = table.rows[i].cells[j].innerHTML; else json_nodes[nodes[j]] = undefined;
         }
         //Push the node to the parent array products
         products.push(json_nodes);
@@ -404,8 +381,39 @@ function GetJSON() {
     //Check if the products array is empty, if so make it undefined to be ignored
     if (products.length == 0) products = undefined;
     //Finally construct the JSON and return it
-    let JSONString = JSON.stringify({ use_legacy: json_use_legacy, defaults, products }, null, json_space);
-    return JSONString;
+    return JSON.stringify({ use_legacy:json_use_legacy, defaults, products }, null, json_space);
+}
+
+//Check if there are any filters selected
+function isAnythingSelected2() {
+    let selected = false;
+    //Iterate through each node
+    for (let i = 0; i < nodes.length; i++) {
+        if (document.getElementById("enable" + nodes[i]).checked) selected = true;
+    }
+    return selected;
+}
+
+//Check if any default filters are selected
+function IsAnyDefaultsSelected2() {
+    let selected = false;
+    //Iterate through each node starting from an offset of 3 and -1 to only collect defaults
+    for (let i = 3; i < nodes.length; i++) {
+        if (document.getElementById("enable" + nodes[i]).checked == true) selected = true;
+    }
+    selected ? document.getElementById("buttonSetDefaults2").disabled = false : document.getElementById("buttonSetDefaults2").disabled = true;
+    return selected;
+}
+
+//Check if product or app_id is selected
+function IsAnyProductsSelected2() {
+    let selected = false;
+    //Iterate through each product node
+    for (let i = 0; i < 2; i++) {
+        if (document.getElementById("enable" + nodes[i]).checked == true) selected = true;
+    }
+    selected ? buttonAddProduct2.disabled = false : buttonAddProduct2.disabled = true;
+    return selected;
 }
 
 function getSelected2(select) {
@@ -417,6 +425,7 @@ function getSelected2(select) {
     }
     return result;
 }
+
 function getAllOptions2(index) {
     let result = [];
     for (let i = 0; i < productsFiltered.length; i++) {
@@ -432,7 +441,7 @@ function fillSelect2(index) {
         opt.value = opt.text = optionsFiltered[index][i];
         if (opt.text == "0") opt.text = "yes";
         if (opt.text == "1") opt.text = "no";
-        document.getElementById(nodes[index]).appendChild(opt);
+        if (optionsFiltered[index][i] != "") document.getElementById(nodes[index]).appendChild(opt);
     }
 }
 
@@ -442,6 +451,16 @@ function selectOptions2(index) {
             document.getElementById(nodes[index]).options[i].selected = true;
         }
     }
+}
+
+function anyOptionsSelected2(index){
+    let result = false;
+    if (document.getElementById(nodes[index]) != null) {
+        for (let i = 0; i < document.getElementById(nodes[index]).length; i++) {
+            if (document.getElementById(nodes[index]).options[i].selected) result = true;
+        }
+    }
+    return result;
 }
 
 function updateSelect2(index) {
@@ -458,9 +477,8 @@ function update2() {
 
     IsAnyProductsSelected2();
     IsAnyDefaultsSelected2();
-
+    if (isSetAppDefaults2) setAppDefaults2();
     if (isAnythingSelected2()) buttonClearFilters2.disabled = false; else buttonClearFilters2.disabled = true;
-
     productsFiltered = products.map(inner => inner.slice());
 
     options = [];
@@ -475,7 +493,7 @@ function update2() {
             options.push(getAllOptions2(i));
         }
     }
-     
+
     let remove;
     for (let i = 0; i < productsFiltered.length; i++) {
         remove = false;
@@ -484,8 +502,8 @@ function update2() {
         }
         if (remove) { productsFiltered.splice(i, 1); i--; };
     }
-    
-    optionsFiltered = [[],[],[],[],[],[],[]];
+
+    optionsFiltered = [[], [], [], [], [], [], []];
     for (let i = 0; i < productsFiltered.length; i++) {
         for (let j = 0; j < nodes.length; j++) {
             if (optionsFiltered[j].indexOf(productsFiltered[i][j]) == -1) optionsFiltered[j].push(productsFiltered[i][j]);
@@ -503,7 +521,6 @@ function update2() {
             fillSelect2(i);
         }
     }
-     
 
     //Set the output box to the output of the JSON parser
     document.getElementById("outputBox2").innerHTML = GetJSON();

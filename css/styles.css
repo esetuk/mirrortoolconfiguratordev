@@ -1,7 +1,10 @@
+:root {
+    color-scheme: dark;
+}
 * {
     color: rgb(255, 255, 255);
     border-radius: 5px;
-    font-family: "Segoe UI",Helvetica,Arial,sans-serif;
+    font-family: "Segoe UI",Helvetica,Arial, sans-serif;   
 }
 h2 {
     text-align: center;
@@ -53,8 +56,6 @@ input {
 input[type="checkbox"] {
     width: 16px;
     height: 16px;
-    background-color:rgb(0, 0, 0);
-    color:rgb(0, 0, 0);
     vertical-align: middle;
     margin-left: 5px;
 }
@@ -73,7 +74,6 @@ table {
     text-align: left;
     background-color: rgb(24, 24, 24);
     font-size: small;
-    
 }
 table, th, td {
     border: 1px solid rgb(65, 65, 65);
@@ -86,7 +86,8 @@ th {
     text-align: center;
 }
 td {
-    width: auto;
+    overflow: auto;
+    max-width: 100px;
 }
 label {
     display: inline-block;
