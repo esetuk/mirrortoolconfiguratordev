@@ -29,7 +29,7 @@ main.addEventListener("input", function () { update(); });
 document.getElementById("buttonSetDefaults2").addEventListener("click", function () { setDefaults2(); });
 buttonAddProduct2.addEventListener("click", function () { addProduct2(); });
 table.addEventListener("click", function (e) { removeRow2(e); });
-buttonReset2.addEventListener("click", function () { }); // TODO
+buttonReset2.addEventListener("click", function () { reset2(); });
 downloadButton2.addEventListener("click", function () { download("filter.json", outputBox2.innerHTML); });
 for (let i = 0; i < nodes.length; i++) {
     if (i < 3 || i > 5) {
@@ -39,7 +39,7 @@ for (let i = 0; i < nodes.length; i++) {
         });
     } else {
         document.getElementById(nodes[i]).addEventListener("focusout", function (e) {
-            if (anyOptionsSelected2(i)){
+            if (anyOptionsSelected2(i)) {
                 document.getElementById("enable" + nodes[i]).checked = true;
                 update2();
             }
@@ -257,9 +257,30 @@ function removeRow2(e) {
     }
 }
 
+function removeAllRows2() {
+    for (let i = 1; i < table.rows.length; i++) {
+        row = table.rows[i];
+        //If the cell is not null
+        if (row) {
+            //Either remove the whole row (for products), or clear the appropriate cells (for defaults)
+            if (i > 1) { 
+                table.rows[i].remove();
+            } else {
+                for (let i = 3; i < nodes.length - 1; i++) {
+                    table.rows[1].cells[i].innerHTML = "";
+                }
+            }
+        }
+    }
+    update2();
+}
+
 //Defaults
 function setAppDefaults2() {
     isSetAppDefaults2 = false;
+    use_legacy.checked = false;
+    clearFilters2();
+    removeAllRows2();
 }
 
 function addProduct2() {
@@ -316,9 +337,11 @@ function setDefaults2() {
 
 
 //JSON reset prompt
-//Not implemented yet
 function reset2() {
-    //if (confirm("This will reset all JSON filter configurations! Are you sure?")) {}
+    if (confirm("This will reset all JSON filter configurations! Are you sure?")) {
+        isSetAppDefaults2 = true;
+    }
+    update2();
 }
 
 //Download function which takes a filename and the text to add to it
@@ -381,7 +404,7 @@ function GetJSON() {
     //Check if the products array is empty, if so make it undefined to be ignored
     if (products.length == 0) products = undefined;
     //Finally construct the JSON and return it
-    return JSON.stringify({ use_legacy:json_use_legacy, defaults, products }, null, json_space);
+    return JSON.stringify({ use_legacy: json_use_legacy, defaults, products }, null, json_space);
 }
 
 //Check if there are any filters selected
@@ -453,7 +476,7 @@ function selectOptions2(index) {
     }
 }
 
-function anyOptionsSelected2(index){
+function anyOptionsSelected2(index) {
     let result = false;
     if (document.getElementById(nodes[index]) != null) {
         for (let i = 0; i < document.getElementById(nodes[index]).length; i++) {
