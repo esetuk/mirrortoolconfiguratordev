@@ -27,21 +27,31 @@
                 </div>
                 <div class="layer2" id="spacer1">
                     <div class="controls" id="filters">
-                        <label>Platform:</label>
-                        <input type="radio" id="enableWindows" name="radioPlatform" value="Windows">
-                        <label for="enableWindows">Windows</label>
-                        <input type="radio" id="enableLinux" name="radioPlatform" value="Linux">
-                        <label for="enableLinux">Linux</label>
+                        <div class="control">
+                            <label for="enableWindows">Windows</label>
+                            <input type="radio" id="enableWindows" name="radioPlatform" value="Windows">
+                        </div>
+                        <div class="control">
+                            <label for="enableLinux">Linux</label>
+                            <input type="radio" id="enableLinux" name="radioPlatform" value="Linux">
+                        </div>
                         <div class="separator"></div>
-                        <label>Parameters:</label>
-                        <input type="checkbox" id="enableMirror">
-                        <label for="enableMirror">Mirror</label>
-                        <input type="checkbox" id="enableRepository">
-                        <label for="enableRepository">Repository</label>
-                        <input type="checkbox" id="enableGlobal">
-                        <label for="enableGlobal">Global</label>
-                        <input type="checkbox" id="enableOptional">
-                        <label for="enableOptional">Optional</label>
+                        <div class="control">
+                            <label for="enableMirror">Mirror</label>
+                            <input type="checkbox" id="enableMirror">
+                        </div>
+                        <div class="control">
+                            <label for="enableRepository">Repository</label>
+                            <input type="checkbox" id="enableRepository">
+                        </div>
+                        <div class="control">
+                            <label for="enableGlobal">Global</label>
+                            <input type="checkbox" id="enableGlobal">
+                        </div>
+                        <div class="control">
+                            <label for="enableOptional">Optional</label>
+                            <input type="checkbox" id="enableOptional">
+                        </div>
                         <div class="separator"></div>
                         <button type="button" id="resetButton">RESET</button>
                     </div>
@@ -75,7 +85,7 @@
                             <option value="ep4 ep5">5 or lower</option>
                             <option value="ep4">4 or lower</option>
                         </select><br>
-                        <label class="labels"
+                        <label id="bigger" class="labels"
                             title="[optional] If set, only level upgrades will be downloaded (nano/continuous updates will not be downloaded).">mirrorOnlyLevelUpdates</label>
                         <input type="checkbox" id="mirrorOnlyLevelUpdates"><br>
                         <label class="labels"
@@ -120,8 +130,9 @@
                     <div class="optional">
                         <label class="labels"
                             title="[optional] Path to filter file in json format. Parameter compatibilityVersion has to be higher than 7.1.0.0 to run program.">filterFilePath</label>
-                        <input type="text" id="filterFilePath" placeholder=""><a href="javascript:openSection(2, true, false);">configure</a><br>
-                        <label class="labels"
+                        <input type="text" id="filterFilePath" placeholder=""><a
+                            href="javascript:openSection(2, true, false);">configure</a><br>
+                        <label id="bigger" class="labels"
                             title=" [optional] If set, hashes on already downloaded files are not checked.">trustDownloadedFilesInRepositoryTemp</label>
                         <input type="checkbox" id="trustDownloadedFilesInRepositoryTemp" placeholder=""><br>
                     </div>
@@ -141,7 +152,7 @@
         <div class="layer1" id="spacer2">
             <div class="heading">
                 <button type="button" class="expander" id="expand2">JSON Filter Configuration ▲</button>
-        </div>
+            </div>
             <div id="expandSection2">
                 <div class="spacer"></div>
                 <form id="form" spellcheck="false">
@@ -162,19 +173,28 @@
                         </div>
                         <div class="component">
                             <label>product</label>
-                            <select name="name" id="name"></select>
+                            <select required name="name" id="name"></select>
                             <input type="checkbox" id="enablename"></input>
                         </div>
                         <div class="component">
-
                             <label>app_id</label>
                             <select name="app_id" id="app_id"></select>
                             <input type="checkbox" id="enableapp_id"></input>
                         </div>
-                        <div class="component">
+                        <div class="component" id="test">
                             <label>version</label>
+                            <select name="versionOperator" id="versionOperator">
+                                <option>=</option>
+                                <option>></option>
+                                <option><</option>
+                                <option>>=</option>
+                                <option><=</option>
+                            </select>
                             <select name="version" id="version"></select>
                             <input type="checkbox" id="enableversion"></input>
+                            <span>to</span>
+                            <select name="versionTo" id="versionTo"></select>
+                            <input type="checkbox" id="enableversionTo"></input>
                         </div>
                         <div class="component">
                             <label>languages</label>
@@ -241,4 +261,5 @@
     <div id="hidden"></div>
     <script type="text/javascript" src="src/main.js"></script>
 </body>
+
 </html>
