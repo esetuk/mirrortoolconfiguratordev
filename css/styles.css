@@ -3,12 +3,53 @@
 }
 * {
     color: rgb(255, 255, 255);
-    border-radius: 5px;
     font-family: "Segoe UI",Helvetica,Arial, sans-serif;   
+    border-radius: 5px;
+}
+html {
+    height: 100%;
+    overflow: hidden;
+}
+body {
+    height: 100%;
+    width: 100%;
+}
+#menuBar {
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid rgb(20,20,20);
+}
+#header {
+    padding: 10px;
+    border-bottom: 1px solid rgb(40,40,40);
+    text-align: center;
+}
+#headline {
+    text-align: center;
+    font-style: italic;
+}
+#navigation {
+    width: auto;
+    height: 100%;
+    background-color: black;
+    float: left;
+    margin: 0;
+    border-right: 1px solid rgb(40,40,40);
+}
+#main {
+    width: 900px;
+    display: inline-block;
+    padding: 20px;
+    height: 100%;
+    background-color: black;
+    margin: 0;
 }
 h2 {
-    text-align: center;
-    margin-top: 0;
+    text-align: left;
+    margin: 0;
 }
 button {
     background-color: transparent;
@@ -30,22 +71,23 @@ button:enabled:hover {
 button:active {
     transform: translateY(1px);
 }
+select, input {
+    background-color: black;
+}
 select {
-    background-color: rgb(24, 24, 24);
     width: auto;
     padding: 5px;
     vertical-align: middle;
     margin: 5px;
     height: auto;
+    border: 1px solid rgb(40,40,40);
 }
 select option:checked {
     color: rgb(255, 255, 255);
-    background-color: rgb(59, 59, 59);
 }
 input {
-    background-color: rgb(24, 24, 24);
+    border: 1px solid rgb(40,40,40);
     outline: none;
-    border: 1px solid rgb(65, 65, 65);
     width: 50%;
     padding: 6px;
     margin: 5px;
@@ -61,7 +103,6 @@ input[type="checkbox"] {
 }
 input[type="radio"] {
     width: auto;
-    border: 1px solid rgb(63, 63, 63);
     vertical-align: middle;
     text-align: right;
     height: auto;
@@ -73,15 +114,14 @@ input:focus {
 table {
     width: 100%;
     text-align: left;
-    background-color: rgb(24, 24, 24);
     font-size: small;
 }
 table, th, td {
-    border: 1px solid rgb(65, 65, 65);
     border-collapse: collapse;
     padding: 5px;
     border-radius: 0;
     cursor: default;
+    border: 1px solid rgb(40,40,40);
 }
 th {
     text-align: center;
@@ -106,11 +146,17 @@ span {
     font-size: small;
 }
 a {
-    color: rgb(90, 87, 87);
+    color: white;
     font-size: small;
+    text-decoration: none;
+    margin: 5px;
+    padding: 5px;
+    line-height: 20px;
+    height: 20px;
 }
 a:hover {
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    background-color: white;
 }
 .disable-select {
     user-select: none; /* supported by Chrome and Opera */
@@ -118,19 +164,6 @@ a:hover {
     -khtml-user-select: none; /* Konqueror HTML */
    -moz-user-select: none; /* Firefox */
    -ms-user-select: none; /* Internet Explorer/Edge */
-}
-.spacer {
-    margin: 20px;
-    padding: 0;
-}
-.expander {
-    border: 0;
-    font-size: medium;
-    font-weight: bold;
-}
-.expander:enabled:hover {
-    background-color: transparent;
-    color: white;
 }
 .heading {
     vertical-align: middle;
@@ -146,27 +179,21 @@ a:hover {
     margin-right: 5px;
 }
 .labels {
-    width: 300px;
+    width: 230px;
+    text-align: right;
 }
 .component {
     width: auto;
     display: inline-block;
     margin: 5px;
-    border: 1px solid rgb(65, 65, 65);
     padding: 10px;
-    background-color: rgb(35, 35, 35);
     height: auto;
     vertical-align: middle;
     text-align: left;
-}
-.layer1 {
-    border: 1px solid rgb(65, 65, 65);
-    background-color: rgb(25, 25, 25);
-    padding: 20px;
+    border: 1px solid rgb(40,40,40);
 }
 .layer2 {
-    border: 1px solid rgb(65, 65, 65);
-    background-color: rgb(30, 30, 30);
+    border: 1px solid rgb(40,40,40);
     padding: 20px;
 }
 .controls {
@@ -180,32 +207,21 @@ a:hover {
     display: inline-block;
     margin: 3px;
 }
-#main {
-    width: 900px;
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    padding: 20px;
-    height: auto;
-    background-color: rgb(20, 20, 20);
-    border: 1px solid rgb(63, 63, 63);
-}
 #outputBox {
     font-family: "Lucida console";
     background-color: rgb(3, 3, 3);
     white-space: pre-wrap;
     resize: none;
     outline: none;
-    border: 1px solid rgb(63, 63, 63);
     padding: 20px;
     margin-bottom: 10px;
+    border: 1px solid rgb(40,40,40);
 }
 #outputBox2 {
     font-family: "Lucida console";
     color: orange;
     text-align: left;
     white-space: pre-wrap;
-    border: 1px solid rgb(63, 63, 63);
     width: auto;
     background-color: black;
     margin: 0;
@@ -214,6 +230,7 @@ a:hover {
     height: auto;
     word-wrap: break-word;
     font-size: small;
+    border: 1px solid rgb(40,40,40);
 }
 #repository, #global {
     margin-top: 20px;
@@ -226,7 +243,8 @@ a:hover {
     color:rgb(63, 63, 63);
     font-size: small;
     text-align: center;
-    margin-bottom: 10px;
+    height: auto;
+    padding: 10px;
 }
 #filters {
     margin-top: 0;
@@ -241,9 +259,6 @@ a:hover {
 #spacer1 {
     margin-top: 20px;
     margin-bottom: 20px;
-}
-#spacer2 {
-    margin-top: 20px;
 }
 #hidden {
     visibility: hidden;

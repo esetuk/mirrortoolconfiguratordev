@@ -1,7 +1,5 @@
-let setDefaults = true, isSetAppDefaults2 = true, pElement, isWindows = true, optionsFiltered, keyDown = false;
+let setDefaults = true, isSetAppDefaults2 = true, pElement, isWindows = true, optionsFiltered, navigationCompact = true;
 enableWindows.checked = true;
-openSection(1, false, false);
-openSection(2, false, false);
 
 //Read in products.csv (obtained by running MirrorTool with --dryRun parameter) and split it by each new line/carraige return
 temp = readTextFile("https://raw.githubusercontent.com/esetuk/mirrortoolconfigurator/master/res/products.csv").split(/[\r\n]+/),
@@ -23,6 +21,20 @@ for (let i = 0; i < temp.length; i++) {
 products.shift();
 
 //Event listeners
+navigation.addEventListener("click", function() {
+    if (navigationCompact) { 
+        headline.innerHTML = "MTC";
+        menuItem1.innerHTML = "CLI";
+        menuItem2.innerHTML = "JSON";
+        menuItems.textAlign = "center"; // not working
+        navigationCompact = false; 
+    } else { 
+        headline.innerHTML = "MirrorToolConfigurator";
+        menuItem1.innerHTML = "CLI configuration";
+        menuItem2.innerHTML = "JSON configuration";
+        navigationCompact = true;
+    }
+});
 buttonClearFilters2.addEventListener("click", function () { clearFilters2(); });
 enablePretty.addEventListener("click", function () { update2(); });
 main.addEventListener("input", function () { update(); });
@@ -64,8 +76,6 @@ versionOperator.addEventListener("change", function (e) {
     update2();
 });
 use_legacy.addEventListener("click", function () { update2(); });
-expand1.addEventListener("click", function () { openSection(1, null, true); });
-expand2.addEventListener("click", function () { openSection(2, null, true); });
 resetButton.addEventListener("click", function () { reset(); });
 enableWindows.addEventListener("click", function () { isWindows ? null : reset() });
 enableLinux.addEventListener("click", function () { isWindows ? reset() : null });
