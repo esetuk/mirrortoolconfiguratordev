@@ -25,7 +25,7 @@ products.shift();
 
 //Event listeners
 document.addEventListener("click", function(e) {
-    if (e.target.id != "navigation"){
+    if (e.target.id != "navigation" && e.target.parentElement.id != "menuBar"){
     menuItem1.innerHTML = "CLI";
     menuItem2.innerHTML = "JSON";
     navigation.style.width = "50px";
