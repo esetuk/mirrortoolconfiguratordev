@@ -3,17 +3,26 @@
     width: 100%;
 }
 * {
-    color: rgb(255, 255, 255);
+    color: rgb(230, 230, 230);
     font-family: "Segoe UI",Helvetica,Arial, sans-serif;
     font-size: small;
+    box-sizing: border-box;
 }
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: black;
+}
+.row {
+    height: 100%;
+}
+.column {
+    float: left;
+    height: 100%;
 }
 #menuBar {
-    width: auto;
+    width: 100%;
     height: auto;
     margin: 0;
     padding: 10px;
@@ -24,10 +33,9 @@ html, body {
     border-bottom: 1px solid rgb(40,40,40);
     text-align: left;
     background-color: rgb(20,20,20);
-    height: 29px;
-    line-height: 29px;
-    padding: 10px;
-    padding-left: 20px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0;
     margin: 0;
     vertical-align: middle;
     width: 100%;
@@ -35,16 +43,9 @@ html, body {
 #headline {
     text-align: left;
     vertical-align: middle;
-    padding: 0;
+    padding-left: 15px;
     margin: 0;
     line-height: auto;
-}
-.row {
-    height: 100%;
-}
-.column {
-    float: left;
-    width: auto;
 }
 #navigation {
     height: 100%;
@@ -56,7 +57,7 @@ html, body {
 #main {
     height: 100%;
     background-color: transparent;
-    border-right: 1px solid rgb(40,40,40);
+
     margin: 0;
     padding: 20px;
     width: 800px;
@@ -69,8 +70,7 @@ h4 {
 }
 button {
     background-color: transparent;
-    border: 1px solid white;
-    color: white;
+    border: 1px solid rgb(230, 230, 230);
     vertical-align: middle;
     border-radius: 5px;
     margin: 3px;
@@ -155,7 +155,6 @@ label {
     margin-bottom: 0;
 }
 a {
-    color: white;
     text-decoration: none;
 }
 a:hover {
