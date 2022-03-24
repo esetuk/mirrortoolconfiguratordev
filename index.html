@@ -13,8 +13,8 @@
     <div id="header" class="disable-select">
         <h4 id="headline">MirrorToolConfigurator</h4>
     </div>
-    <div id="navigationMain">
-        <div id="navigation">
+    <div class="row">
+        <div id="navigation" class="column">
             <menu id="menuBar">
                 <a id="menuItem1" href="#">CLI configuration</a><br>
                 <a id="menuItem2" href="#">JSON configuration</a>
@@ -25,7 +25,7 @@
                     target="_blank">Documentation</a>
             </div>
         </div>
-        <div id="main" class="disable-select" spellcheck="false">
+        <div id="main" class="column" spellcheck="false">
             <div id="layerCLI">
                 <div class="layer2">
                     <div id="outputBox"></div>
@@ -158,106 +158,108 @@
                     </div>
                 </div>
             </div>
-        <div id="layerJSON" spellcheck="false">
-            <div class="layer2">
-                <div id="outputBox2"></div>
-                <div class="controls">
-                    <button id="copyButton2" type="button">COPY</button>
-                    <button id="downloadButton2" type="button">DOWNLOAD</button>
-                    <div class="separator"></div>
-                    <label for="enablePretty" id="labelEnablePretty">Pretty</label>
-                    <input type="checkbox" id="enablePretty"></input>
+            <div id="layerJSON" spellcheck="false">
+                <div class="layer2">
+                    <div id="outputBox2"></div>
+                    <div class="controls">
+                        <button id="copyButton2" type="button">COPY</button>
+                        <button id="downloadButton2" type="button">DOWNLOAD</button>
+                        <div class="separator"></div>
+                        <label for="enablePretty" id="labelEnablePretty">Pretty</label>
+                        <input type="checkbox" id="enablePretty"></input>
+                    </div>
                 </div>
-            </div>
-            <div class="layer2" id="spacer1">
-                <div class="component">
-                    <label for="use_legacy">use_legacy</label>
-                    <input type="checkbox" id="use_legacy"></input>
+                <div class="layer2" id="spacer1">
+                    <div class="component">
+                        <label for="use_legacy">use_legacy</label>
+                        <input type="checkbox" id="use_legacy"></input>
+                    </div>
+                    <div class="component">
+                        <label>product</label>
+                        <select required name="name" id="name"></select>
+                        <input type="checkbox" id="enablename"></input>
+                    </div>
+                    <div class="component">
+                        <label>app_id</label>
+                        <select name="app_id" id="app_id"></select>
+                        <input type="checkbox" id="enableapp_id"></input>
+                    </div>
+                    <div class="component" id="test">
+                        <label>version</label>
+                        <select name="versionOperator" id="versionOperator">
+                            <option>=</option>
+                            <option>></option>
+                            <option>
+                                << /option>
+                            <option>>=</option>
+                            <option>
+                                <=< /option>
+                        </select>
+                        <select name="version" id="version"></select>
+                        <input type="checkbox" id="enableversion"></input>
+                        <span>to</span>
+                        <select name="versionTo" id="versionTo"></select>
+                        <input type="checkbox" id="enableversionTo"></input>
+                    </div>
+                    <div class="component">
+                        <label>languages</label>
+                        <select name="languages" id="languages" multiple></select>
+                        <input type="checkbox" id="enablelanguages"></input>
+                    </div>
+                    <div class="component">
+                        <label>os_types</label>
+                        <select name="os_types" id="os_types" multiple></select>
+                        <input type="checkbox" id="enableos_types"></input>
+                    </div>
+                    <div class="component">
+                        <label>platforms</label>
+                        <select name="platforms" id="platforms" multiple></select>
+                        <input type="checkbox" id="enableplatforms"></input>
+                    </div>
+                    <div class="component">
+                        <label>legacy</label>
+                        <select name="legacy" id="legacy"></select>
+                        <input type="checkbox" id="enablelegacy"></input>
+                    </div>
+                    <div class="controls">
+                        <button id="buttonSetDefaults2" type="button" title="Set defaults">SET DEFAULTS</button>
+                        <button id="buttonAddProduct2" type="button" title="Add product">ADD PRODUCT</button>
+                        <div class="separator"></div>
+                        <button id="buttonClearFilters2" type="button" title="Clear filters">CLEAR</button>
+                    </div>
                 </div>
-                <div class="component">
-                    <label>product</label>
-                    <select required name="name" id="name"></select>
-                    <input type="checkbox" id="enablename"></input>
-                </div>
-                <div class="component">
-                    <label>app_id</label>
-                    <select name="app_id" id="app_id"></select>
-                    <input type="checkbox" id="enableapp_id"></input>
-                </div>
-                <div class="component" id="test">
-                    <label>version</label>
-                    <select name="versionOperator" id="versionOperator">
-                        <option>=</option>
-                        <option>></option>
-                        <option>
-                            << /option>
-                        <option>>=</option>
-                        <option>
-                            <=< /option>
-                    </select>
-                    <select name="version" id="version"></select>
-                    <input type="checkbox" id="enableversion"></input>
-                    <span>to</span>
-                    <select name="versionTo" id="versionTo"></select>
-                    <input type="checkbox" id="enableversionTo"></input>
-                </div>
-                <div class="component">
-                    <label>languages</label>
-                    <select name="languages" id="languages" multiple></select>
-                    <input type="checkbox" id="enablelanguages"></input>
-                </div>
-                <div class="component">
-                    <label>os_types</label>
-                    <select name="os_types" id="os_types" multiple></select>
-                    <input type="checkbox" id="enableos_types"></input>
-                </div>
-                <div class="component">
-                    <label>platforms</label>
-                    <select name="platforms" id="platforms" multiple></select>
-                    <input type="checkbox" id="enableplatforms"></input>
-                </div>
-                <div class="component">
-                    <label>legacy</label>
-                    <select name="legacy" id="legacy"></select>
-                    <input type="checkbox" id="enablelegacy"></input>
-                </div>
-                <div class="controls">
-                    <button id="buttonSetDefaults2" type="button" title="Set defaults">SET DEFAULTS</button>
-                    <button id="buttonAddProduct2" type="button" title="Add product">ADD PRODUCT</button>
-                    <div class="separator"></div>
-                    <button id="buttonClearFilters2" type="button" title="Clear filters">CLEAR</button>
-                </div>
-            </div>
-            <div class="layer2">
-                <table id="table">
-                    <tr>
-                        <th>app_id</th>
-                        <th>name</th>
-                        <th>version</th>
-                        <th>languages</th>
-                        <th>os_types</th>
-                        <th>platforms</th>
-                        <th>legacy</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td>NA</td>
-                        <td>defaults</td>
-                        <td>NA</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>NA</td>
-                        <td></td>
-                    </tr>
-                </table>
-                <div class="controls">
-                    <button id="buttonReset2" type="button" title="Reset JSON configuration">RESET</button>
+                <div class="layer2">
+                    <table id="table">
+                        <tr>
+                            <th>app_id</th>
+                            <th>name</th>
+                            <th>version</th>
+                            <th>languages</th>
+                            <th>os_types</th>
+                            <th>platforms</th>
+                            <th>legacy</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>NA</td>
+                            <td>defaults</td>
+                            <td>NA</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>NA</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <div class="controls">
+                        <button id="buttonReset2" type="button" title="Reset JSON configuration">RESET</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="hidden"></div>
-        <script type="text/javascript" src="src/main.js"></script>
+    </div>
+    <div id="hidden"></div>
+    <script type="text/javascript" src="src/main.js"></script>
 </body>
 
 </html>

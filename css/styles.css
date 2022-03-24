@@ -1,20 +1,16 @@
 :root {
     color-scheme: dark;
+    width: 100%;
 }
 * {
     color: rgb(255, 255, 255);
     font-family: "Segoe UI",Helvetica,Arial, sans-serif;
     font-size: small;
 }
-html {
+html, body {
     height: 100%;
-}
-body {
-    height: 100%;
-}
-#navigationMain {
-    height: 100%;
-    width: 1000px;
+    margin: 0;
+    padding: 0;
 }
 #menuBar {
     width: auto;
@@ -27,13 +23,14 @@ body {
 #header {
     border-bottom: 1px solid rgb(40,40,40);
     text-align: left;
-    background-color: rgb(10,10,10);
+    background-color: rgb(20,20,20);
     height: 29px;
     line-height: 29px;
     padding: 10px;
     padding-left: 20px;
     margin: 0;
     vertical-align: middle;
+    width: 100%;
 }
 #headline {
     text-align: left;
@@ -42,20 +39,27 @@ body {
     margin: 0;
     line-height: auto;
 }
+.row {
+    height: 100%;
+}
+.column {
+    float: left;
+    width: auto;
+}
 #navigation {
     height: 100%;
-    background-color: rgb(10,10,10);
+    background-color: rgb(20,20,20);
     margin: 0;
     border-right: 1px solid rgb(40,40,40);
     padding: 0;
-    float: left;
 }
 #main {
-    width: 800px;
-    padding: 20px;
-    background-color: rgb(0, 0, 0);
+    height: 100%;
+    background-color: transparent;
+    border-right: 1px solid rgb(40,40,40);
     margin: 0;
-    display: inline-block;
+    padding: 20px;
+    width: 800px;
 }
 h4 {
     text-align: left;
@@ -150,10 +154,6 @@ label {
     vertical-align: middle;
     margin-bottom: 0;
 }
-body {
-    background-color: rgb(0, 0, 0);
-    margin: auto;
-}
 a {
     color: white;
     text-decoration: none;
@@ -195,7 +195,7 @@ a:hover {
     border: 1px solid rgb(40,40,40);
     padding: 20px;
     border-radius: 5px;
-    background-color: rgb(10,10,10);
+    background-color: rgb(15, 15, 15);
 }
 .controls {
     text-align: right;
@@ -276,4 +276,4 @@ colorParameter {color: rgb(67, 166, 224);}
 colorArgument {color: rgb(224, 120, 102);}
 colorPassword {color: rgb(180, 147, 57);}
 colorStart {color: rgb(199, 90, 153);}
-colorWarn {color: rgb(63, 63, 63);}
+colorWarn {color: rgb(70, 70, 70);}
