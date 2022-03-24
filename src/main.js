@@ -28,10 +28,9 @@ document.addEventListener("click", function(e) {
     if (e.target.id != "navigation" && e.target.parentElement.id != "menuBar"){
     menuItem1.innerHTML = "CLI";
     menuItem2.innerHTML = "JSON";
-    navigation.style.width = "50px";
+    navigation.style.width = "60px";
     navigationCompact = false; 
     footer.hidden = true;
-    menuBar.style.textAlign = "center";
     }
 });
 menuBar.addEventListener("click", function(e) {
@@ -43,11 +42,11 @@ navigation.addEventListener("click", function(e) {
         menuItem1.innerHTML = "CLI configuration";
         menuItem2.innerHTML = "JSON configuration";
         navigation.style.width = "auto";
-        menuBar.style.textAlign = "right";
         navigationCompact = true;
         footer.hidden = false;
         }
 });
+configureLink.addEventListener("click", function() { openSection("layerJSON"); });
 buttonClearFilters2.addEventListener("click", function () { clearFilters2(); });
 enablePretty.addEventListener("click", function () { update2(); });
 main.addEventListener("input", function () { update(); });
@@ -108,6 +107,16 @@ let clipboard2 = new Clipboard(copyButton2, {
         return outputBox2.innerHTML;
     }
 });
+
+function openSection(name){
+    if (name = "layerJSON") {
+        layerJSON.hidden = false;
+        layerCLI.hidden = true;
+    } else {
+        layerJSON.hidden = true;
+        layerCLI.hidden = false;
+    }
+}
 
 function update() {
     updateBaseDirectory();
@@ -234,16 +243,6 @@ update2();
 function updateBaseDirectory() {
     if (enableWindows.checked) { isWindows = true; b = "C:\\mirrorTool\\"; } else { b = "/tmp/mirrorTool/"; isWindows = false; }
     return b;
-}
-
-//Open a section or toggle it, change the icon
-function openSection(n, open, toggle) {
-    let section = [expandSection1, expandSection2, expand1, expand2, "Command Line Configuration", "JSON Filter Configuration"];
-    toggle ? section[n - 1].hidden ? open = true : open = false : null;
-    open ? icon = "▼" : icon = "▲";
-    section[n - 1].hidden = !open;
-    section[n + 1].innerHTML = section[n + 3] + " " + icon;
-    window.scrollTo(0, document.body.scrollHeight);
 }
 
 //Scroll to bottom of document

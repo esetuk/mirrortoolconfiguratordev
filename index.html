@@ -16,7 +16,7 @@
     <div id="navigationMain">
         <div id="navigation">
             <menu id="menuBar">
-                <a id="menuItem1" href="#" class="active">CLI configuration</a><br>
+                <a id="menuItem1" href="#">CLI configuration</a><br>
                 <a id="menuItem2" href="#">JSON configuration</a>
                 <div id="menuItems"></div>
             </menu>
@@ -139,8 +139,8 @@
                         <div class="optional">
                             <label class="labels"
                                 title="[optional] Path to filter file in json format. Parameter compatibilityVersion has to be higher than 7.1.0.0 to run program.">filterFilePath</label>
-                            <input type="text" id="filterFilePath" placeholder=""><a
-                                href="javascript:openSection(2, true, false);">configure</a><br>
+                            <input type="text" id="filterFilePath" placeholder="">
+                            <a href="#" id="configureLink">configure</a><br>
                             <label id="bigger" class="labels"
                                 title=" [optional] If set, hashes on already downloaded files are not checked.">trustDownloadedFilesInRepositoryTemp</label>
                             <input type="checkbox" id="trustDownloadedFilesInRepositoryTemp" placeholder=""><br>
