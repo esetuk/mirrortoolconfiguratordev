@@ -3,70 +3,65 @@
     width: 100%;
 }
 * {
-    color: rgb(230, 230, 230);
+    color: rgb(255, 255, 255);
     font-family: "Segoe UI",Helvetica,Arial, sans-serif;
-    font-size: small;
     box-sizing: border-box;
+    border-radius: 5px;
 }
 html, body {
     height: 100%;
-    margin: 0;
+    margin: auto;
+    width: 100%;
     padding: 0;
     background-color: black;
 }
-.row {
-    height: 100%;
+#menuItem1, #menuItem2 {
+    padding: 3px;
 }
-.column {
-    float: left;
+.row {
     height: 100%;
 }
 #menuBar {
     width: 100%;
     height: auto;
     margin: 0;
-    padding: 10px;
-    text-align: right;
-    border-bottom: 1px solid rgb(40,40,40);
+    padding: 0;
+    text-align: center;
+    background-color: transparent;
+    display: inline-block;
 }
 #header {
-    border-bottom: 1px solid rgb(40,40,40);
-    text-align: left;
-    background-color: rgb(20,20,20);
-    height: 50px;
-    line-height: 50px;
+    text-align: center;
+    background-color: transparent;
+    height: auto;
     padding: 0;
     margin: 0;
     vertical-align: middle;
     width: 100%;
 }
 #headline {
-    text-align: left;
+    text-align: center;
     vertical-align: middle;
-    padding-left: 15px;
     margin: 0;
     line-height: auto;
-}
-#navigation {
-    height: 100%;
-    background-color: rgb(20,20,20);
-    margin: 0;
-    border-right: 1px solid rgb(40,40,40);
-    padding: 0;
+    padding-top: 5px;
 }
 #main {
-    height: 100%;
-    background-color: transparent;
-    border-right: 1px solid rgb(40,40,40);
-    margin: 0;
-    padding: 20px;
-    width: 800px;
+    height: auto;
+    background-color: rgb(13, 13, 13);
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 900px;
+    border: 1px solid rgb(40,40,40);
+    padding-top: 10px;
 }
-h4 {
-    text-align: left;
+h2, h4 {
+    text-align: center;
     margin: 0;
     padding: 0;
-    font-size: 18px;
+    width: auto;
+    display: inline-block;
 }
 button {
     background-color: transparent;
@@ -74,7 +69,10 @@ button {
     vertical-align: middle;
     border-radius: 5px;
     margin: 3px;
-    padding-bottom: 2px;
+    padding: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: small;
 }
 button:disabled {
     color : rgb(87, 87, 87);
@@ -90,6 +88,7 @@ button:active {
 select, input {
     background-color: black;
     border-radius: 5px;
+    font-size: small;
 }
 select {
     width: auto;
@@ -117,14 +116,14 @@ input[type="checkbox"] {
     width: 16px;
     height: 16px;
     vertical-align: middle;
-    margin: 5px;
+    margin: 2px;
 }
 input[type="radio"] {
     width: auto;
     vertical-align: middle;
     text-align: right;
     height: auto;
-    margin: 5px;
+    margin: 2px;
 }
 input:focus {
     outline: none;
@@ -132,6 +131,8 @@ input:focus {
 table {
     width: 100%;
     text-align: left;
+    font-size: small;
+    background-color: black;
 }
 table, th, td {
     border-collapse: collapse;
@@ -153,9 +154,11 @@ label {
     text-align: right;
     vertical-align: middle;
     margin-bottom: 0;
+    font-size: small;
 }
 a {
     text-decoration: none;
+    color: white;
 }
 a:hover {
     color: grey;
@@ -168,7 +171,7 @@ a:hover {
    -ms-user-select: none; /* Internet Explorer/Edge */
 }
 .separator {
-    border-left: 3px solid rgb(65, 65, 65);
+    border-left: 3px solid rgb(40,40,40);
     height: 20px;
     display: inline-block;
     vertical-align: middle;
@@ -191,18 +194,19 @@ a:hover {
     border-radius: 5px;
 }
 .layer2 {
-    border: 1px solid rgb(40,40,40);
     padding: 20px;
     border-radius: 5px;
-    background-color: black;
+    margin: 20px;
+    background-color: rgb(16,16,16);
+    border: 1px solid rgb(40,40,40);
 }
 .controls {
     text-align: right;
     width: auto;
     height: auto;
-    margin: 10px;
-    margin-bottom: 0;
-    margin-right: 0;
+}
+#configureLink {
+    font-size: small;
 }
 .control {
     width: auto;
@@ -214,22 +218,26 @@ a:hover {
     white-space: pre-wrap;
     resize: none;
     outline: none;
-    padding: 10px;
+    padding: 20px;
     margin-bottom: 10px;
     border: 1px solid rgb(40,40,40);
+    border-radius: 5px;
+    font-size: small;
 }
 #outputBox2 {
-    color: rgb(221, 163, 109);
+    color: orange;
     text-align: left;
     white-space: pre-wrap;
     width: auto;
     background-color: black;
     margin: 0;
     margin-bottom: 10px;
-    padding: 10px;
+    padding: 20px;
     height: auto;
     word-wrap: break-word;
     border: 1px solid rgb(40,40,40);
+    border-radius: 5px;
+    font-size: small;
 }
 #repository, #global {
     margin-top: 20px;
@@ -238,16 +246,9 @@ a:hover {
     margin: 0;
     padding: 0;
 }
-#footer {
-    color:rgb(63, 63, 63);
-    text-align: center;
-    height: auto;
-    padding: 10px;
-}
 #filters {
     margin-top: 0;
     text-align: center;
-    margin-bottom: 10px;
 }
 #enablePrettyBox {
     display: inline-block;
