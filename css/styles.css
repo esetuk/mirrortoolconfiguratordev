@@ -3,63 +3,74 @@
 }
 * {
     color: rgb(255, 255, 255);
-    font-family: "Segoe UI",Helvetica,Arial, sans-serif;   
+    font-family: "Segoe UI",Helvetica,Arial, sans-serif;
+    font-size: small;
 }
 html {
     height: 100%;
 }
 body {
     height: 100%;
-    width: 100%;
+}
+#navigationMain {
+    height: 100%;
+    width: 1000px;
 }
 #menuBar {
     width: auto;
     height: auto;
     margin: 0;
     padding: 10px;
-    text-align: center;
+    text-align: right;
     border-bottom: 1px solid rgb(40,40,40);
 }
 #header {
-    padding: 10px;
     border-bottom: 1px solid rgb(40,40,40);
     text-align: left;
+    background-color: rgb(20,20,20);
+    height: 29px;
+    line-height: 29px;
+    padding: 10px;
+    padding-left: 20px;
+    margin: 0;
+    vertical-align: middle;
 }
 #headline {
     text-align: left;
-    font-style: italic;
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+    line-height: auto;
 }
 #navigation {
-    width: auto;
     height: 100%;
-    background-color: black;
-    float: left;
+    background-color: rgb(20,20,20);
     margin: 0;
     border-right: 1px solid rgb(40,40,40);
     padding: 0;
-    margin: 0;
+    float: left;
 }
 #main {
-    width: 900px;
-    display: inline-block;
-    padding: 20px;
     height: 100%;
-    background-color: black;
+    width: 800px;
+    padding: 20px;
+    background-color: rgb(0, 0, 0);
     margin: 0;
+    display: inline-block;
 }
-h2 {
+h4 {
     text-align: left;
     margin: 0;
+    padding: 0;
+    font-size: 18px;
 }
 button {
     background-color: transparent;
     border: 1px solid white;
+    color: white;
     vertical-align: middle;
-    padding: 3px;
-    padding-left: 6px;
-    padding-right: 6px;
-    margin: 5px;
     border-radius: 5px;
+    margin: 3px;
 }
 button:disabled {
     color : rgb(87, 87, 87);
@@ -117,7 +128,6 @@ input:focus {
 table {
     width: 100%;
     text-align: left;
-    font-size: small;
 }
 table, th, td {
     border-collapse: collapse;
@@ -137,7 +147,6 @@ label {
     display: inline-block;
     width: auto;
     text-align: right;
-    font-size: small;
     vertical-align: middle;
     margin-bottom: 0;
 }
@@ -145,21 +154,12 @@ body {
     background-color: rgb(0, 0, 0);
     margin: auto;
 }
-span {
-    font-size: small;
-}
 a {
     color: white;
-    font-size: small;
     text-decoration: none;
-    margin: 5px;
-    padding: 5px;
-    line-height: 20px;
-    height: 20px;
 }
 a:hover {
-    color: white;
-    font-weight: bold;
+    color: grey;
 }
 .disable-select {
     user-select: none; /* supported by Chrome and Opera */
@@ -167,11 +167,6 @@ a:hover {
     -khtml-user-select: none; /* Konqueror HTML */
    -moz-user-select: none; /* Firefox */
    -ms-user-select: none; /* Internet Explorer/Edge */
-}
-.heading {
-    vertical-align: middle;
-    height: 30px;
-    text-align: center;
 }
 .separator {
     border-left: 3px solid rgb(65, 65, 65);
@@ -205,7 +200,9 @@ a:hover {
     text-align: right;
     width: auto;
     height: auto;
-    margin-top: 10px;
+    margin: 10px;
+    margin-bottom: 0;
+    margin-right: 0;
 }
 .control {
     width: auto;
@@ -213,17 +210,15 @@ a:hover {
     margin: 3px;
 }
 #outputBox {
-    font-family: "Lucida console";
     background-color: rgb(3, 3, 3);
     white-space: pre-wrap;
     resize: none;
     outline: none;
-    padding: 20px;
+    padding: 10px;
     margin-bottom: 10px;
     border: 1px solid rgb(40,40,40);
 }
 #outputBox2 {
-    font-family: "Lucida console";
     color: orange;
     text-align: left;
     white-space: pre-wrap;
@@ -231,14 +226,13 @@ a:hover {
     background-color: black;
     margin: 0;
     margin-bottom: 10px;
-    padding: 20px;
+    padding: 10px;
     height: auto;
     word-wrap: break-word;
-    font-size: small;
     border: 1px solid rgb(40,40,40);
 }
 #repository, #global {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 #optional {
     margin: 0;
@@ -246,7 +240,6 @@ a:hover {
 }
 #footer {
     color:rgb(63, 63, 63);
-    font-size: small;
     text-align: center;
     height: auto;
     padding: 10px;
@@ -254,6 +247,7 @@ a:hover {
 #filters {
     margin-top: 0;
     text-align: center;
+    margin-bottom: 10px;
 }
 #enablePrettyBox {
     display: inline-block;
@@ -277,28 +271,8 @@ a:hover {
     padding: 0;
     text-align: center;
 }
-colorParameter {
-    color: rgb(67, 166, 224);
-    font-family: "Lucida console";
-    font-size: small;
-}
-colorArgument {
-    color: rgb(224, 120, 102);
-    font-family: "Lucida console";
-    font-size: small;
-}
-colorPassword {
-    color: rgb(180, 147, 57);
-    font-family: "Lucida console";
-    font-size: small;
-}
-colorStart {
-    color: rgb(199, 90, 153);
-    font-family: "Lucida console";
-    font-size: small;
-}
-colorWarn {
-    color: rgb(63, 63, 63);
-    font-family: "Lucida console";
-    font-size: small;
-}
+colorParameter {color: rgb(67, 166, 224);}
+colorArgument {color: rgb(224, 120, 102);}
+colorPassword {color: rgb(180, 147, 57);}
+colorStart {color: rgb(199, 90, 153);}
+colorWarn {color: rgb(63, 63, 63);}

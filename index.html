@@ -10,22 +10,23 @@
 </head>
 
 <body>
-    <div id="header">
-        <h2 id="headline">MirrorToolConfigurator</h2>
+    <div id="header" class="disable-select">
+        <h4 id="headline">MirrorToolConfigurator</h4>
     </div>
+    <div id="navigationMain">
     <div id="navigation">
         <menu id="menuBar">
             <a id="menuItem1" href="#" class="active">CLI configuration</a><br>
             <a id="menuItem2" href="#">JSON configuration</a>
             <div id="menuItems"></div>
         </menu>
-        <div id="footer">
-            <a href="https://github.com/esetuk/mirrortoolconfigurator" target="_blank">Github</a><br>
+        <div id="footer" class="disable-select"> 
             <a href="https://help.eset.com/protect_install/90/en-US/mirror_tool_windows.html"
-                target="_blank">MirrorTool</a>
+                target="_blank">Documentation</a>
         </div>
     </div>
-    <form id="main" class="disable-select" spellcheck="false">
+    <div id="main" class="disable-select" spellcheck="false">
+        <div id="layerCLI">
         <div class="layer2">
             <div id="outputBox"></div>
             <div class="controls">
@@ -122,7 +123,6 @@
                         title="[optional] Password used, when output directory is accessed using smb(e.g:\\hostname).">networkDrivePassword</label>
                     <input type="password" id="networkDrivePassword" placeholder="">
                 </div>
-            </div>
             <div class="layer2" id="repository">
                 <label class="labels"
                     title="[required for repository update] Repository server for repository creation.">repositoryServer*</label>
@@ -155,7 +155,8 @@
             </div>
         </div>
         </div>
-        <form id="form" spellcheck="false">
+    </div>
+        <div id="layerJSON" spellcheck="false">
             <div class="layer2">
                 <div id="outputBox2"></div>
                 <div class="controls">
@@ -252,7 +253,9 @@
                     <button id="buttonReset2" type="button" title="Reset JSON configuration">RESET</button>
                 </div>
             </div>
-        </form>
+        </div>
+        </div>
+    </div>
         <div id="hidden"></div>
         <script type="text/javascript" src="src/main.js"></script>
 </body>

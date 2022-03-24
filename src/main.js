@@ -1,6 +1,9 @@
 let setDefaults = true, isSetAppDefaults2 = true, pElement, isWindows = true, optionsFiltered, navigationCompact = true;
 enableWindows.checked = true;
 
+layerCLI.hidden = false;
+layerJSON.hidden = true;
+
 //Read in products.csv (obtained by running MirrorTool with --dryRun parameter) and split it by each new line/carraige return
 temp = readTextFile("https://raw.githubusercontent.com/esetuk/mirrortoolconfigurator/master/res/products.csv").split(/[\r\n]+/),
     products = [], productsFiltered = [],
@@ -21,19 +24,29 @@ for (let i = 0; i < temp.length; i++) {
 products.shift();
 
 //Event listeners
-navigation.addEventListener("click", function() {
-    if (navigationCompact) { 
-        headline.innerHTML = "MTC";
-        menuItem1.innerHTML = "CLI";
-        menuItem2.innerHTML = "JSON";
-        menuItems.textAlign = "center"; // not working
-        navigationCompact = false; 
-    } else { 
-        headline.innerHTML = "MirrorToolConfigurator";
+document.addEventListener("click", function(e) {
+    if (e.target.id != "navigation"){
+    menuItem1.innerHTML = "CLI";
+    menuItem2.innerHTML = "JSON";
+    navigation.style.width = "50px";
+    navigationCompact = false; 
+    footer.hidden = true;
+    menuBar.style.textAlign = "center";
+    }
+});
+menuBar.addEventListener("click", function(e) {
+    layerCLI.hidden = !(e.target.id == "menuItem1");
+    layerJSON.hidden = (e.target.id == "menuItem1");
+});
+navigation.addEventListener("click", function(e) {
+    if (e.target.parentElement.id != "menuBar"){
         menuItem1.innerHTML = "CLI configuration";
         menuItem2.innerHTML = "JSON configuration";
+        navigation.style.width = "auto";
+        menuBar.style.textAlign = "right";
         navigationCompact = true;
-    }
+        footer.hidden = false;
+        }
 });
 buttonClearFilters2.addEventListener("click", function () { clearFilters2(); });
 enablePretty.addEventListener("click", function () { update2(); });
