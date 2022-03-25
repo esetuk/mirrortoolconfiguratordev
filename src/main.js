@@ -24,7 +24,8 @@ for (let i = 0; i < temp.length; i++) {
 products.shift();
 
 //Event listeners
-navigation.addEventListener("click", function(e) {
+menuBar.addEventListener("click", function(e) {
+    let hide;
     if (e.target.id == "menuItem1") hide = false;
     if (e.target.id == "menuItem2") hide = true;
     layerCLI.hidden = hide;

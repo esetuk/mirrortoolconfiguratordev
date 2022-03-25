@@ -3,7 +3,7 @@
     width: 100%;
 }
 * {
-    color: rgb(255, 255, 255);
+    color: rgb(209, 206, 206);
     font-family: "Segoe UI",Helvetica,Arial, sans-serif;
     box-sizing: border-box;
 }
@@ -14,30 +14,31 @@ html, body {
     padding: 0;
     background-color: black;
 }
-#menuItem1, #menuItem2 {
+.menuItem {
     margin: 0;
     height: 100%;
-    line-height: 30px;
+    line-height: 20px;
     padding: 3px;
 }
 .row {
     height: 100%;
 }
-#navigation {
+.navigation {
     height: auto;
     width: 100%;
     margin: 0;
-    padding: 5px;
+    padding: 10px;
     text-align: left;
     padding-left: 20px;
-    background-color: rgb(20,20,20);
     display: inline-block;
     font-size: small;
     border-bottom: 1px solid rgb(40,40,40);
 }
+#footer {
+    text-align: center;
+}
 #header {
     text-align: center;
-    background-color: rgb(25,25,25);
     border-bottom: 1px solid rgb(40,40,40);
     height: auto;
     padding: 10px;
@@ -82,9 +83,9 @@ button:disabled {
     color : rgb(87, 87, 87);
     border: 1px solid;
 }
-button:enabled:hover {
-    background-color: #ffffff;
-    color: black;
+button:enabled:hover, a:hover {
+    color: rgb(67, 166, 224);
+    border-color: rgb(67, 166, 224);
 }
 button:active {
     transform: translateY(1px);
@@ -159,13 +160,6 @@ label {
     vertical-align: middle;
     margin-bottom: 0;
     font-size: small;
-}
-a {
-
-    color: white;
-}
-a:hover {
-    color: grey;
 }
 .disable-select {
     user-select: none; /* supported by Chrome and Opera */
