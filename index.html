@@ -10,22 +10,17 @@
 </head>
 
 <body>
+    <div id="main" class="column" spellcheck="false">
     <div id="header" class="disable-select">
-        <h4 id="headline">MirrorToolConfigurator</h4>
+        <h2 id="headline">MirrorToolConfigurator</h2>
     </div>
-    <div class="row">
-        <div id="navigation" class="column">
-            <menu id="menuBar">
-                <a id="menuItem1" href="#">CLI configuration</a><br>
-                <a id="menuItem2" href="#">JSON configuration</a>
-                <div id="menuItems"></div>
-            </menu>
-            <div id="footer" class="disable-select">
-                <a href="https://help.eset.com/protect_install/90/en-US/mirror_tool_windows.html"
-                    target="_blank">Documentation</a>
-            </div>
-        </div>
-        <div id="main" class="column" spellcheck="false">
+        <div class="layer2">
+        <menu id="menuBar">
+            <h4><a id="menuItem1" href="#">CLI configuration</a></h4>
+            <div class="separator"></div>
+            <h4><a id="menuItem2" href="#">JSON configuration</a></h4>
+        </menu>
+    </div>
             <div id="layerCLI">
                 <div class="layer2">
                     <div id="outputBox"></div>
@@ -37,29 +32,29 @@
                 <div class="layer2" id="spacer1">
                     <div class="controls" id="filters">
                         <div class="control">
-                            <label for="enableWindows">Windows</label>
                             <input type="radio" id="enableWindows" name="radioPlatform" value="Windows">
+                            <label for="enableWindows">Windows</label>
                         </div>
                         <div class="control">
-                            <label for="enableLinux">Linux</label>
                             <input type="radio" id="enableLinux" name="radioPlatform" value="Linux">
+                            <label for="enableLinux">Linux</label>
                         </div>
                         <div class="separator"></div>
                         <div class="control">
-                            <label for="enableMirror">Mirror</label>
                             <input type="checkbox" id="enableMirror">
+                            <label for="enableMirror">Mirror</label>
                         </div>
                         <div class="control">
-                            <label for="enableRepository">Repository</label>
                             <input type="checkbox" id="enableRepository">
+                            <label for="enableRepository">Repository</label>
                         </div>
                         <div class="control">
-                            <label for="enableGlobal">Global</label>
                             <input type="checkbox" id="enableGlobal">
+                            <label for="enableGlobal">Global</label>
                         </div>
                         <div class="control">
-                            <label for="enableOptional">Optional</label>
                             <input type="checkbox" id="enableOptional">
+                            <label for="enableOptional">Optional</label>
                         </div>
                         <div class="separator"></div>
                         <button type="button" id="resetButton">RESET</button>
@@ -255,7 +250,6 @@
             </div>
         </div>
         <div id="hidden"></div>
-    </div>
     </div>
     <script type="text/javascript" src="src/main.js"></script>
 </body>
