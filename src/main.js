@@ -24,9 +24,11 @@ for (let i = 0; i < temp.length; i++) {
 products.shift();
 
 //Event listeners
-menuBar.addEventListener("click", function(e) {
-    layerCLI.hidden = !(e.target.id == "menuItem1");
-    layerJSON.hidden = (e.target.id == "menuItem1");
+navigation.addEventListener("click", function(e) {
+    if (e.target.id == "menuItem1") hide = false;
+    if (e.target.id == "menuItem2") hide = true;
+    layerCLI.hidden = hide;
+    layerJSON.hidden = !hide;
 });
 configureLink.addEventListener("click", function() { openSection("layerJSON"); });
 buttonClearFilters2.addEventListener("click", function () { clearFilters2(); });

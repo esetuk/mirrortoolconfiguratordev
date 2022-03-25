@@ -6,7 +6,6 @@
     color: rgb(255, 255, 255);
     font-family: "Segoe UI",Helvetica,Arial, sans-serif;
     box-sizing: border-box;
-    border-radius: 5px;
 }
 html, body {
     height: 100%;
@@ -16,26 +15,33 @@ html, body {
     background-color: black;
 }
 #menuItem1, #menuItem2 {
+    margin: 0;
+    height: 100%;
+    line-height: 30px;
     padding: 3px;
 }
 .row {
     height: 100%;
 }
-#menuBar {
-    width: 100%;
+#navigation {
     height: auto;
+    width: 100%;
     margin: 0;
-    padding: 0;
-    text-align: center;
-    background-color: transparent;
+    padding: 5px;
+    text-align: left;
+    padding-left: 20px;
+    background-color: rgb(20,20,20);
     display: inline-block;
+    font-size: small;
+    border-bottom: 1px solid rgb(40,40,40);
 }
 #header {
     text-align: center;
-    background-color: transparent;
+    background-color: rgb(25,25,25);
+    border-bottom: 1px solid rgb(40,40,40);
     height: auto;
-    padding: 0;
-    margin: 0;
+    padding: 10px;
+    margin: auto;
     vertical-align: middle;
     width: 100%;
 }
@@ -44,17 +50,15 @@ html, body {
     vertical-align: middle;
     margin: 0;
     line-height: auto;
-    padding-top: 5px;
 }
 #main {
     height: auto;
-    background-color: rgb(13, 13, 13);
     margin: auto;
     margin-top: 20px;
-    margin-bottom: 20px;
     width: 900px;
     border: 1px solid rgb(40,40,40);
-    padding-top: 10px;
+    border-bottom: 0;
+    background-color: rgb(15,15,15);
 }
 h2, h4 {
     text-align: center;
@@ -157,7 +161,7 @@ label {
     font-size: small;
 }
 a {
-    text-decoration: none;
+
     color: white;
 }
 a:hover {
@@ -195,10 +199,8 @@ a:hover {
 }
 .layer2 {
     padding: 20px;
-    border-radius: 5px;
-    margin: 20px;
-    background-color: rgb(16,16,16);
-    border: 1px solid rgb(40,40,40);
+    border-bottom: 1px solid rgb(40,40,40);
+    border-top: 0;
 }
 .controls {
     text-align: right;
@@ -227,7 +229,6 @@ a:hover {
     padding: 20px;
     margin-bottom: 10px;
     border: 1px solid rgb(40,40,40);
-    border-radius: 5px;
     font-size: small;
 }
 #outputBox2 {
@@ -242,11 +243,7 @@ a:hover {
     height: auto;
     word-wrap: break-word;
     border: 1px solid rgb(40,40,40);
-    border-radius: 5px;
     font-size: small;
-}
-#repository, #global {
-    margin-top: 20px;
 }
 #optional {
     margin: 0;
@@ -261,10 +258,6 @@ a:hover {
     width: auto;
     margin: 0;
     margin-left: 5px;
-}
-#spacer1 {
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 #hidden {
     visibility: hidden;
