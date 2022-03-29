@@ -3,39 +3,39 @@
     width: 100%;
 }
 * {
-    color: rgb(209, 206, 206);
+    color: white;
     font-family: "Segoe UI",Helvetica,Arial, sans-serif;
     box-sizing: border-box;
 }
 html, body {
-    height: 100%;
-    margin: auto;
-    width: 100%;
+    margin: 0;
     padding: 0;
+    width: 100%;
     background-color: black;
 }
-.menuItem {
+.menuItem, .footerItem {
     margin: 0;
     height: 100%;
-    line-height: 20px;
-    padding: 3px;
-}
-.row {
-    height: 100%;
+    line-height: 100%;
+    padding: 4px;
 }
 .navigation {
-    height: auto;
+    height: 35px;
+    line-height: 35px;
     width: 100%;
     margin: 0;
-    padding: 10px;
-    text-align: left;
-    padding-left: 20px;
+    padding: 0;
+    text-align: center;
     display: inline-block;
     font-size: small;
     border-bottom: 1px solid rgb(40,40,40);
 }
 #footer {
     text-align: center;
+}
+.links {
+    color: grey;
+    font-size: small;
 }
 #header {
     text-align: center;
@@ -68,40 +68,44 @@ h2, h4 {
     width: auto;
     display: inline-block;
 }
+a {
+    text-decoration: none;
+}
+a:hover {
+    color: white;
+}
 button {
     background-color: transparent;
-    border: 1px solid rgb(230, 230, 230);
+    border: 0;
     vertical-align: middle;
-    border-radius: 5px;
-    margin: 3px;
-    padding: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
+    margin: 2px;
+    padding: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
     font-size: small;
 }
-button:disabled {
-    color : rgb(87, 87, 87);
-    border: 1px solid;
+img {
+    height: 16px;
+    width: 16px;
+    vertical-align: middle;
 }
-button:enabled:hover, a:hover {
-    color: rgb(67, 166, 224);
-    border-color: rgb(67, 166, 224);
+button:disabled {
+    filter: invert(75%);
+}
+button:enabled:hover {
+    filter: invert(50%);
 }
 button:active {
     transform: translateY(1px);
 }
-select, input {
-    background-color: black;
-    border-radius: 5px;
-    font-size: small;
-}
 select {
     width: auto;
-    padding: 5px;
+    padding: 4px;
     vertical-align: middle;
     margin: 5px;
     height: auto;
     border: 1px solid rgb(40,40,40);
+    overflow: auto;
 }
 select option:checked {
     color: rgb(255, 255, 255);
@@ -109,13 +113,16 @@ select option:checked {
 input {
     border: 1px solid rgb(40,40,40);
     outline: none;
-    width: 50%;
+    width: 45%;
     padding: 6px;
     margin: 5px;
     display: inline-block;
     vertical-align: middle;
     height: 100%;
-    border-radius: 5px;
+}
+select, input {
+    background-color: black;
+    font-size: small;
 }
 input[type="checkbox"] {
     width: 16px;
@@ -124,10 +131,10 @@ input[type="checkbox"] {
     margin: 2px;
 }
 input[type="radio"] {
-    width: auto;
+    width: 16px;
+    height: 16px;
     vertical-align: middle;
     text-align: right;
-    height: auto;
     margin: 2px;
 }
 input:focus {
@@ -138,24 +145,23 @@ table {
     text-align: left;
     font-size: small;
     background-color: black;
+    border: 1px solid rgb(40,40,40);
 }
 table, th, td {
     border-collapse: collapse;
     padding: 5px;
-    border-radius: 0;
     cursor: default;
-    border: 1px solid rgb(40,40,40);
 }
 th {
     text-align: center;
+    border-bottom: 1px solid rgb(40,40,40);
 }
 td {
-    overflow: auto;
-    max-width: 100px;
+    max-width: 200px;
+    word-wrap: break-word;
 }
 label {
     display: inline-block;
-    width: auto;
     text-align: right;
     vertical-align: middle;
     margin-bottom: 0;
@@ -165,11 +171,11 @@ label {
     user-select: none; /* supported by Chrome and Opera */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
-   -moz-user-select: none; /* Firefox */
-   -ms-user-select: none; /* Internet Explorer/Edge */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
 }
 .separator {
-    border-left: 3px solid rgb(40,40,40);
+    border-left: 3px solid grey;
     height: 20px;
     display: inline-block;
     vertical-align: middle;
@@ -177,7 +183,7 @@ label {
     margin-right: 5px;
 }
 .labels {
-    width: 230px;
+    width: 30%;
     text-align: right;
 }
 .component {
@@ -189,34 +195,48 @@ label {
     vertical-align: middle;
     text-align: left;
     border: 1px solid rgb(40,40,40);
-    border-radius: 5px;
+    font-size: small;
 }
 .layer2 {
     padding: 20px;
     border-bottom: 1px solid rgb(40,40,40);
     border-top: 0;
 }
+#defaults {
+    border: 1px solid rgb(40,40,40);
+    width: auto;
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+}
 .controls {
     text-align: right;
     width: auto;
     height: auto;
-    margin: 10px;
-    margin-right: 0;
-    margin-bottom: 0;
-}
-#configureLink {
-    font-size: small;
+    margin-top: 10px;
 }
 .control {
     width: auto;
     display: inline-block;
     margin: 3px;
 }
+span {
+    padding: 3px;
+}
+#controlsCLI {
+    padding: 10px;
+}
+#controlsJSON {
+    float: right;
+}
+#controlsCompact {
+    float: left;
+}
 #mirrorOnlyLevelUpdates, #trustDownloadedFilesInRepositoryTemp {
     margin: 5px;
 }
 #outputBox {
-    background-color: rgb(3, 3, 3);
+    background-color: black;
     white-space: pre-wrap;
     resize: none;
     outline: none;
@@ -226,13 +246,12 @@ label {
     font-size: small;
 }
 #outputBox2 {
-    color: orange;
+    color: rgb(144, 96, 199);
     text-align: left;
     white-space: pre-wrap;
     width: auto;
     background-color: black;
     margin: 0;
-    margin-bottom: 10px;
     padding: 20px;
     height: auto;
     word-wrap: break-word;
@@ -242,6 +261,9 @@ label {
 #optional {
     margin: 0;
     padding: 0;
+}
+#repository, #global, #layerJSON, .optional {
+    display: none;
 }
 #filters {
     margin: 0;
@@ -253,7 +275,7 @@ label {
     margin: 0;
     margin-left: 5px;
 }
-#hidden {
+#hidden, #toastLabel {
     visibility: hidden;
 }
 #bigger {
@@ -266,7 +288,7 @@ label {
     text-align: center;
 }
 colorParameter {color: rgb(67, 166, 224);}
-colorArgument {color: rgb(224, 120, 102);}
-colorPassword {color: rgb(180, 147, 57);}
-colorStart {color: rgb(199, 90, 153);}
+colorArgument {color: rgb(26, 133, 127);}
+colorPassword {color: rgb(144, 96, 199);}
+colorStart {color: rgb(129, 87, 177);}
 colorWarn {color: rgb(70, 70, 70);}
