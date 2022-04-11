@@ -1,8 +1,8 @@
 //Functions for JSON configuration
 
-let optionsFiltered, compactJSON = true,  isSetAppDefaults2 = false;
+let optionsFiltered, compactJSON = true, isSetAppDefaults2 = false;
 
-temp = readTextFile("/res/products.csv").split(/[\r\n]+/),
+temp = readTextFile("https://esetuk.github.io/mirrortoolconfigurator/res/products.csv").split(/[\r\n]+/),
     products = [], productsFiltered = [], nodes = ["app_id", "name", "version", "languages", "os_types", "platforms", "legacy"];
 for (let i = 0; i < temp.length; i++) {
     temp[i] = temp[i].split(",").slice(0, -1)
@@ -15,49 +15,35 @@ products.shift();
 
 buttonSetDefaults2.addEventListener("click", function () { setDefaults2(); });
 buttonAddProduct2.addEventListener("click", function () { addProduct2(); });
-table.addEventListener("click", function (e) { removeRow2(e); });
 buttonReset2.addEventListener("click", function () { reset2(); });
-downloadButton2.addEventListener("click", function () { download("filter.json", outputBox2.innerHTML); });
-for (let i = 0; i < nodes.length; i++) {
-    if (i < 3 || i > 5) {
-        document.getElementById(nodes[i]).addEventListener("change", function (e) {
-            document.getElementById("enable" + nodes[i]).checked = true;
-            update2();
-        });
-    } else {
-        document.getElementById(nodes[i]).addEventListener("focusout", function (e) {
-            if (anyOptionsSelected2(i)) {
-                document.getElementById("enable" + nodes[i]).checked = true;
-                update2();
-            }
-        });
-    }
-    document.getElementById("enable" + nodes[i]).addEventListener("click", function () {
-        document.getElementById(nodes[i]).selectedIndex = 0;
-        update2();
-    });
-}
-enableversion.addEventListener("click", function () { update2(); });
-versionTo.addEventListener("change", function () {
-    enableversionTo.checked = true;
-    update2();
-});
-enableversionTo.addEventListener("click", function (e) { update2(); });
-versionOperator.addEventListener("change", function (e) { update2(); });
-use_legacy.addEventListener("click", function () { update2(); });
-resetButton.addEventListener("click", function () { reset(); });
-enableWindows.addEventListener("click", function () { isWindows ? null : reset() });
-enableLinux.addEventListener("click", function () { isWindows ? reset() : null });
 buttonClearFilters2.addEventListener("click", function () { clearFilters2(); update2(); });
-buttonCompact2.addEventListener("click", function () {
-    compactJSON ? compactJSON = false : compactJSON = true;
-    update2();
-});
+buttonCompact2.addEventListener("click", function () { compactJSON ? compactJSON = false : compactJSON = true; updateJSON(); });
+downloadButton2.addEventListener("click", function () { download("filter.json", outputBox2.innerHTML); });
+table.addEventListener("click", function (e) { removeRow2(e); });
+document.getElementById("name").addEventListener("change", function () { enablename.checked = true; update2(); });
+app_id.addEventListener("change", function () { enableapp_id.checked = true; update2(); });
+versionOperator.addEventListener("change", function () { update2(); });
+version.addEventListener("change", function () { enableversion.checked = true; updateVersionTo(); update2(); });
+versionTo.addEventListener("change", function () { enableversionTo.checked = true; update2(); });
+languages.addEventListener("focusout", function () { enablelanguages.checked = true; update2(); });
+os_types.addEventListener("focusout", function () { enableos_types.checked = true; update2(); });
+platforms.addEventListener("focusout", function () { enableplatforms.checked = true; update2(); });
+enablename.addEventListener("click", function () { document.getElementById("name").selectedIndex = 0; update2(); });
+enableapp_id.addEventListener("click", function () { app_id.selectedIndex = 0; update2(); });
+enableversion.addEventListener("click", function () { version.selectedIndex = 0; update2(); });
+enablelanguages.addEventListener("click", function () { languages.options.selectedIndex = 0; update2(); });
+enableos_types.addEventListener("click", function () { os_types.selectedIndex = 0; update2(); });
+enableplatforms.addEventListener("click", function () { platforms.selectedIndex = 0; update2(); });
+enableversion.addEventListener("click", function () { version.selectedIndex = 0; update2(); });
+enableversionTo.addEventListener("click", function () { versionTo.selectedIndex = 0; update2(); });
+use_legacy.addEventListener("click", function () { updateJSON(); });
+legacy.addEventListener("change", function () { enablelegacy.checked = true; update2(); });
+enablelegacy.addEventListener("click", function () { versionTo.selectedIndex = 0; update2(); });
 
 let clipboard2 = new Clipboard(copyButton2, {
     text: function () {
         update2();
-        toast("Copied to clipboard!", 1000);
+        toast("Copied to clipboard");
         return outputBox2.innerHTML;
     }
 });
@@ -147,7 +133,7 @@ function addProduct2() {
                 table.rows[rowCount].cells[i].id = "remove";
             }
         }
-        clearFilters2();
+        clearFilters2()
         update2();
     }
 }
@@ -262,6 +248,16 @@ function updateSelect2(index) {
     }
 }
 
+function updateVersionTo() {
+    versionTo.innerHTML = version.innerHTML;
+    for (let i = 0; i < versionTo.length; i++) {
+        if (version.selectedIndex <= i) {
+            versionTo.removeChild(versionTo.options[i]);
+            i--;
+        }
+    }
+}
+
 function sortNode(index) {
     index == 2 ? optionsFiltered[index] = optionsFiltered[index].sort(function (a, b) { return a - b; }) : optionsFiltered[index] = optionsFiltered[index].sort();
 }
@@ -280,10 +276,8 @@ function update2() {
     if (isSetAppDefaults2) setAppDefaults2();
     IsAnyProductsSelected2();
     IsAnyDefaultsSelected2();
-    versionTo.disabled = enableversionTo.disabled = (versionOperator.value != "=" || !enableversion.checked);
-    versionOperator.disabled = enableversionTo.checked;
-    if (!enableversion.checked) enableversionTo.checked = false;
-
+    if (enableversion.checked && versionOperator.selectedIndex == 0) { enableversionTo.disabled = false; versionTo.disabled = false; } else { enableversionTo.disabled = true; versionTo.disabled = true; enableversionTo.checked = false; }
+    if (enableversionTo.checked) { versionOperator.selectedIndex = 0; versionOperator.disabled = true; } else { versionOperator.disabled = false; }
     if (isAnythingSelected2()) buttonClearFilters2.disabled = false; else buttonClearFilters2.disabled = true;
     productsFiltered = products.map(inner => inner.slice());
     options = [];
@@ -327,7 +321,6 @@ function update2() {
             }
         }
     }
-    if (!enableversion.checked) versionTo.innerHTML = version.innerHTML;
     for (let i = 0; i < nodes.length; i++) {
         sortNode(i);
         if (document.getElementById("enable" + nodes[i]).checked) {
@@ -348,14 +341,14 @@ function updateJSON() {
     let json_use_legacy = use_legacy.checked, json_nodes = {}, products = [], defaults = [];
     for (let i = 3; i < nodes.length - 1; i++) {
         if (table.rows[1].cells[i].innerHTML != "")
-        table.rows[1].cells[i].innerHTML.includes(",") ? json_nodes[nodes[i]] = table.rows[1].cells[i].innerHTML.split(",") : json_nodes[nodes[i]] = table.rows[1].cells[i].innerHTML;
+            table.rows[1].cells[i].innerHTML.includes(",") ? json_nodes[nodes[i]] = table.rows[1].cells[i].innerHTML.split(",") : json_nodes[nodes[i]] = table.rows[1].cells[i].innerHTML;
     }
     Object.keys(json_nodes).length == 0 ? defaults = undefined : defaults = json_nodes;
     for (let i = 2; i < table.rows.length; i++) {
         json_nodes = {};
         for (let j = 0; j < nodes.length - 1; j++) {
             if (table.rows[i].cells[j].innerHTML != "")
-            table.rows[i].cells[j].innerHTML.includes(",") ? json_nodes[nodes[j]] = table.rows[i].cells[j].innerHTML.split(",") : json_nodes[nodes[j]] = table.rows[i].cells[j].innerHTML; else json_nodes[nodes[j]] = undefined;
+                table.rows[i].cells[j].innerHTML.includes(",") ? json_nodes[nodes[j]] = table.rows[i].cells[j].innerHTML.split(",") : json_nodes[nodes[j]] = table.rows[i].cells[j].innerHTML; else json_nodes[nodes[j]] = undefined;
         }
         products.push(json_nodes);
     }

@@ -5,18 +5,17 @@
     <title>MirrorToolConfigurator</title>
     <meta charset="UTF-8" />
     <link rel="shortcut icon" type="image/x-icon" href="res/favicon.png">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <script type="text/javascript" src="src/clipboard.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css" type="text/css"/>
 </head>
 
 <body>
-    <div id="main" class="disable-select" spellcheck="false">
+    <form id="main" class="disable-select" spellcheck="false" autocomplete="off">
         <div id="header" class="disable-select">
             <h2 id="headline">MirrorToolConfigurator</h2>
         </div>
         <menu class="navigation" id="menuBar">
-            <a class="menuItem" id="menuItem1" href="#">CLI configuration</a>
-            <a class="menuItem" id="menuItem2" href="#">JSON configuration</a>
+            <a class="menuItem" id="menuItem1" href="javascript:void(0)">CLI configuration</a>
+            <a class="menuItem" id="menuItem2" href="javascript:void(0)">JSON configuration</a>
         </menu>
         <div id="layerCLI">
             <div class="layer2">
@@ -132,7 +131,7 @@
                     <label class="labels"
                         title="[optional] Path to filter file in json format. Parameter compatibilityVersion has to be higher than 7.1.0.0 to run program.">filterFilePath</label>
                     <input type="text" id="filterFilePath" placeholder="">
-                    <a href="#" class="links" id="configureLink">configure</a><br>
+                    <a href="javascript:void(0)" class="links" id="configureLink">configure</a><br>
                     <label id="bigger" class="labels"
                         title=" [optional] If set, hashes on already downloaded files are not checked.">trustDownloadedFilesInRepositoryTemp</label>
                     <input type="checkbox" id="trustDownloadedFilesInRepositoryTemp" placeholder=""><br>
@@ -155,9 +154,9 @@
                 <div class="controls" id="controlsJSON">
                     <button id="buttonReset2" type="button" title="Reset JSON configuration"><img
                             src="res/resetbutton.png"></img></button>
-                    <button id="buttonCompact2" type="button" title="Compact JSON"><img
-                            src="res/compactbutton.png"></img></button>
-                    <button id="copyButton2" type="button" title="Copy to clipboard"><img
+                    <button id="buttonCompact2" type="button" title="Compact/expand JSON"><img
+                            id="compactImage" src="res/compactbutton.png"></img></button>
+                    <button id="copyButton2" type="button" title="Copy JSON to clipboard"><img
                             src="res/copybutton.png"></img></button>
                     <button id="downloadButton2" type="button" title="Download JSON file"><img
                             src="res/downloadbutton.png"></img></button>
@@ -197,7 +196,7 @@
                 <div id="defaults">
                     <div class="component">
                         <label>languages</label>
-                        <select name="languages" id="languages" multiple></select>
+                        <select name="languages" id="languages" multiple="multiple"></select>
                         <input type="checkbox" id="enablelanguages"></input>
                     </div>
                     <div class="component">
@@ -207,7 +206,7 @@
                     </div>
                     <div class="component">
                         <label>platforms</label>
-                        <select name="platforms" id="platforms" multiple></select>
+                        <select name="platforms" id="platforms" multiple=></select>
                         <input type="checkbox" id="enableplatforms"></input>
                     </div>
                     <button id="buttonSetDefaults2" type="button" title="Set defaults"><img
@@ -238,13 +237,13 @@
                         <th></th>
                     </tr>
                     <tr>
-                        <td>NA</td>
+                        <td></td>
                         <td>defaults</td>
-                        <td>NA</td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>NA</td>
+                        <td></td>
+                        <td></td>
                         <td></td>
                     </tr>
                 </table>
@@ -254,11 +253,12 @@
             <a class="links" id="" href="https://help.eset.com/protect_install/90/en-US/mirror_tool_windows.html"
                 target="_blank">Documentation</a>
         </menu>
-    </div>
+    </form>
     <div id="toastLabel"></div>
     <div id="hidden"></div>
 </body>
-<script type="text/javascript" src="src/global.js"></script>
-<script type="text/javascript" src="src/cli.js"></script>
-<script type="text/javascript" src="src/json.js"></script>
+<script type="text/javascript" src="js/clipboard.min.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/cli.js"></script>
+<script type="text/javascript" src="js/json.js"></script>
 </html>
